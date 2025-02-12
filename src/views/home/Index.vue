@@ -4,6 +4,7 @@ import CreateKoolBox from './components/kools/CreateKoolBox.vue';
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import KoolList from './components/kools/KoolList.vue';
+import Cookies from "js-cookie";
 const { getKools, loading } = useKool()
 
 const store = useStore()
@@ -28,11 +29,13 @@ onMounted(async () => {
     <!--start content home page area-->
 
     <!--start create a post box area-->
-    <CreateKoolBox />
+    <div class="max-w-xl overflow-hidden mx-auto border border-gray-200 rounded-2xl mt-2">
+        <CreateKoolBox />
+    </div>
     <!--end create a post box area-->
 
     <!--start timeline area-->
-    <KoolList :kools="kools.data" :loading="loading" />
+    <KoolList :kools="kools.data" :is-replies="false" :metadata="kools.metadata" :loading="loading" />
     <!--end timeline area-->
 
     <!--end content home page area-->

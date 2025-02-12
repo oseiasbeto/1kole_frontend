@@ -5,6 +5,7 @@ import { useAuth } from './repositories/auth-repository';
 import Cookies from "js-cookie"
 import SplashScreen from './components/UI/SplashScreen.vue';
 import { useStore } from 'vuex';
+import CreateKoolModal from './views/home/components/modals/CreateKoolModal.vue';
 const { refreshToken, loading } = useAuth()
 loading.value = true
 
@@ -39,6 +40,10 @@ onBeforeMount(async () => {
         <Container>
         <router-view></router-view>
         </Container>
+
+        <!--start modals-->
+        <CreateKoolModal/>
+        <!--end modals-->
     </div>
     <div v-else>
         <SplashScreen/>

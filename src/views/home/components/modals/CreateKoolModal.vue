@@ -9,7 +9,8 @@ import {
     TransitionRoot,
     TransitionChild
 } from '@headlessui/vue'
-import RegisterUserForn from "../../forms/RegisterUserForn.vue"
+import CreateKoolBox from "../kools/CreateKoolBox.vue"
+import Kool from "../kools/Kool.vue"
 
 // Importe as referências necessários para o bom funcionamento deste componente.
 const store = useStore()
@@ -19,19 +20,20 @@ const modal = computed(() => {
     return store.getters.modal
 })
 
+
 // Esta função tem como finalidade fechar a caixa de diálogo aberta.
-const close = (name) => {
+const close = () => {
     store.dispatch("setModal", {
         show: false,
-        name,
-        data: {}
+        name: modal.value.name,
+        data: modal.value.data
     })
 }
 </script>
 
 <template>
-    <TransitionRoot appear :show="modal.show && modal.name == 'register user'" as="div">
-        <Dialog as="div" class="relative z-[111]" @close="close(modal.name)">
+    <TransitionRoot appear :show="modal.show && modal.name == 'create kool'" as="div">
+        <Dialog as="div" class="relative z-[111]" @close="close()">
             <TransitionChild as="div" enter="duration-300 ease-out" enter-from="opacity-100"
                 leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="fixed inset-0 bg-black bg-opacity-25"></div>
@@ -66,20 +68,19 @@ const close = (name) => {
 
                                 <!--start content body-->
                                 <div
-                                    class="p-4 overflow-y-auto flex-1 max-h-[60vh] scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                                    <!-- Custom scrollbar styles -->
-                                    <RegisterUserForn />
+                                    class="overflow-y-auto flex-1 max-h-[80vh] scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+                                    <Kool 
+                                    v-if="modal.data.parentKool" 
+                                    :kool="modal.data.parentKool"
+                                    :show-reactions="false"
+                                    :show-author-username="false"
+                                    :readonly="true"
+                                    :is-reply="false"
+                                    :show-border="false"
+                                    />
+                                   <CreateKoolBox :is-reply="!modal.data.isReply ? false : true" :originalKool="modal.data.parentKool"/>
                                 </div>
                                 <!--end content body-->
-
-                                <!--start footer body-->
-                                <div class="p-4 border-t border-gray-200 flex justify-end">
-                                    <button @click="close(modal.name)"
-                                        class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none">
-                                        Avançar
-                                    </button>
-                                </div>
-                                <!--end footer body-->
                             </div>
                         </DialogPanel>
                         <!--end body content-->

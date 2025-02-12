@@ -2,9 +2,13 @@
 import { defineProps } from 'vue';
 import Kool from './Kool.vue';
 
-defineProps({
+const props = defineProps({
     kools: {
         type: Array,
+        required: true
+    },
+    isReplies: {
+        type: Boolean,
         required: true
     },
     loading: {
@@ -16,8 +20,8 @@ defineProps({
 
 <template>
     <div v-if="!loading" class="space-y-4">
-        <div v-if="kools.length">
-            <Kool v-for='kool in kools' :key='kool.id' :kool='kool'/>
+        <div v-if="props.kools.length">
+            <Kool v-for='kool in props.kools' :isReply="props.isReplies" :key='kool.id' :kool='kool'/>
         </div>
     </div>
     <div v-else>

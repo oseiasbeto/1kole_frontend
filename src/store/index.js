@@ -7,6 +7,10 @@ export default createStore({
             data: [],
             metadata: {}
         },
+        replies: {
+            data: [],
+            metadata: {}
+        },
         user: {},
         accessToken: null,
         modal: {
@@ -29,6 +33,12 @@ export default createStore({
         ['SET_KOOLS'](state, payload) {
             state.kools = {
                 data: payload.kools,
+                metadata: payload.metadata
+            }
+        },
+        ['SET_REPLIES'](state, payload) {
+            state.replies = {
+                data: payload.replies,
                 metadata: payload.metadata
             }
         },
@@ -65,6 +75,35 @@ export default createStore({
             } else {
                 kool.reKools.splice(index, 1);
             }
+        },
+        ["TOGGLE_LIKE_REPLIES"](state, { replyId, userId }) {
+            const reply = state.replies.data.find(r => r._id === replyId);
+            if (!reply) return;
+
+            const index = reply.likes.indexOf(userId);
+            if (index === -1) {
+                reply.likes.push(userId);
+            } else {
+                reply.likes.splice(index, 1);
+            }
+        },
+        ["TOGGLE_REPOST_REPLIES"](state, { replyId, userId }) {
+            const reply = state.replies.data.find(r => r._id === replyId);
+            if (!reply) return;
+
+            const index = reply.reKools.indexOf(userId);
+            if (index === -1) {
+                reply.reKools.push(userId);
+            } else {
+                reply.reKools.splice(index, 1);
+            }
+        },
+        ["FOLLOW_AUTHOR_KOOL"](state, followerId) {
+            const kool = state.kool;
+            if (!kool) return;
+            else {
+                kool.author.followers.push(followerId);
+            }
         }
     },
     actions: {
@@ -73,6 +112,9 @@ export default createStore({
         },
         setKools({ commit }, payload) {
             commit('SET_KOOLS', payload)
+        },
+        setReplies({ commit }, payload) {
+            commit('SET_REPLIES', payload)
         },
         setUser({ commit }, payload) {
             commit('SET_USER', payload)
@@ -90,6 +132,7 @@ export default createStore({
     getters: {
         kool: (state) => state.kool,
         kools: (state) => state.kools,
+        replies: (state) => state.replies,
         user: (state) => state.user,
         accessToken: (state) => state.accessToken,
         modal: (state) => state.modal,

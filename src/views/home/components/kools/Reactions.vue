@@ -11,13 +11,17 @@ const props = defineProps({
         type: Object,
         required: true
     },
+    isReply: {
+        type: Boolean,
+        required: true
+    },
     user: {
         type: Object,
         required: true
     }
 });
 
-const emit = defineEmits(["update:like", "update:rekool"]);
+const emit = defineEmits(["update:like", "update:rekool", "openModal"]);
 
 // Computed para verificar se o usuário já deu like ou repost
 const isLiked = computed(() => props.kool?.likes?.includes(props.user._id) || false);
@@ -33,8 +37,11 @@ const toggleLike = () => {
     if (!props.kool || !props.user) return;
 
     // Envia a mutação para atualizar o estado global corretamente
-    store.commit('TOGGLE_LIKE_KOOLS', { koolId: props.kool._id, userId: props.user._id });
-
+    if (!props.isReply) {
+        store.commit('TOGGLE_LIKE_KOOLS', { koolId: props.kool._id, userId: props.user._id });
+    } else {
+        store.commit('TOGGLE_LIKE_REPLIES', { replyId: props.kool._id, userId: props.user._id });
+    }
     // Atualiza a versão local do Kool e emite evento
     emit("update:like", isLiked.value);
 };
@@ -44,17 +51,26 @@ const toggleRepost = () => {
     if (!props.kool || !props.user) return;
 
     // Envia a mutação para atualizar o estado global corretamente
-    store.commit('TOGGLE_REPOST_KOOLS', { koolId: props.kool._id, userId: props.user._id });
+    if (!props.isReply) {
+        store.commit('TOGGLE_REPOST_KOOLS', { koolId: props.kool._id, userId: props.user._id });
+    } else {
+        store.commit('TOGGLE_REPOST_REPLIES', { replyId: props.kool._id, userId: props.user._id });
+    }
 
     // Atualiza a versão local do Kool e emite evento
     emit("update:rekool", isReposted.value);
 };
+
+const openModal = (name, data) => {
+    emit("openModal", ({ name, data }));
+}
 </script>
 
 <template>
     <div class="flex justify-between mt-2 text-gray-500">
         <!-- Reply -->
-        <button class="flex items-center gap-1 hover:text-blue-500 transition">
+        <button @click="openModal('create kool', { parentKool: props.kool })"
+            class="flex items-center gap-1 hover:text-blue-500 transition">
             <svg fill="none" width="18" viewBox="0 0 24 24" height="18"
                 style="color: rgb(111, 134, 159); pointer-events: none;">
                 <path fill="hsl(211, 20%, 53%)" fill-rule="evenodd" clip-rule="evenodd"
