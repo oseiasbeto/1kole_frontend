@@ -9,8 +9,8 @@ import {
     TransitionRoot,
     TransitionChild
 } from '@headlessui/vue'
-import CreateKoolBox from "../kools/CreateKoolBox.vue"
-import Kool from "../kools/Kool.vue"
+import CreateKoolBox from "@/components/kools/CreateKoolBox.vue"
+import Kool from "@/components/kools/Kool.vue"
 
 // Importe as referências necessários para o bom funcionamento deste componente.
 const store = useStore()
@@ -41,13 +41,13 @@ const close = () => {
 
             <!--start body-->
             <div class="fixed inset-0 overflow-y-auto">
-                <div class="flex items-center justify-center min-h-full p-4 text-center">
+                <div class="flex items-center justify-center min-h-full text-center">
                     <TransitionChild as="div" enter="duration-300 ease-out" enter-from="opacity-0 scale-95"
                         enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
                         leave-to="opacity-0 scale-95">
                         <!--start body content-->
                         <DialogPanel class="w-full overflow-hidden text-left align-middle transition-all transform">
-                            <div class="bg-white min-w-[600px] rounded-[16px] shadow-lg flex flex-col max-h-[80vh]">
+                            <div class="bg-white min-w-[600px] mx-w-[600px] rounded-[16px] shadow-lg flex flex-col max-h-[80vh]">
                                 <!--start header body-->
                                 <div class="p-4 border-b border-gray-200 flex justify-between items-center">
                                     <div>
@@ -65,7 +65,7 @@ const close = () => {
 
                                 </div>
                                 <!--end header body-->
-
+                                
                                 <!--start content body-->
                                 <div
                                     class="overflow-y-auto flex-1 max-h-[80vh] scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
@@ -78,7 +78,7 @@ const close = () => {
                                     :is-reply="false"
                                     :show-border="false"
                                     />
-                                   <CreateKoolBox :is-reply="!modal.data.isReply ? false : true" :originalKool="modal.data.parentKool"/>
+                                   <CreateKoolBox :is-reply="modal.data.isReply" :should-add-reply="modal.data.shouldAddReply ?? true" :originalKool="modal.data.parentKool"/>
                                 </div>
                                 <!--end content body-->
                             </div>

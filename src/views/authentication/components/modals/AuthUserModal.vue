@@ -13,7 +13,7 @@ import {
 
 
 import { useAuth } from '@/repositories/auth-repository';
-import SmallSpinner from "../UI/spinners/SmallSpinner.vue";
+import SmallSpinner from "@/components/UI/spinners/SmallSpinner.vue";
 import AuthUserForm from "../../forms/AuthUserForm.vue";
 import { useRouter } from "vue-router";
 

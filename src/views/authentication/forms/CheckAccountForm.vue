@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import Input from '../components/UI/inputs/Input.vue';
+import Input from '@/components/UI/inputs/Input.vue';
 import { useStore } from 'vuex';
 
 const emit = defineEmits();

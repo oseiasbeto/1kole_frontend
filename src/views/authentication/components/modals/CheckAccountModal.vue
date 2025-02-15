@@ -12,7 +12,7 @@ import {
 import CheckAccountForm from "../../forms/CheckAccountForm.vue"
 
 import { useAuth } from '@/repositories/auth-repository';
-import SmallSpinner from "../UI/spinners/SmallSpinner.vue"
+import SmallSpinner from "@/components/UI/spinners/SmallSpinner.vue";
 import { useRouter } from "vue-router"
 
 const { checkAccount, loading, error } = useAuth()

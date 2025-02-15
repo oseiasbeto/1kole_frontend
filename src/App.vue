@@ -1,11 +1,12 @@
 <script setup>
 import { computed, onBeforeMount } from 'vue';
-import Container from './components/UI/Container.vue';
 import { useAuth } from './repositories/auth-repository';
 import Cookies from "js-cookie"
 import SplashScreen from './components/UI/SplashScreen.vue';
 import { useStore } from 'vuex';
-import CreateKoolModal from './views/home/components/modals/CreateKoolModal.vue';
+import CreateKoolModal from '@/components/UI/modals/CreateKoolModal.vue';
+import Sidebar from '@/components/UI/Sidebar.vue';
+import Content from './components/UI/Content.vue';
 const { refreshToken, loading } = useAuth()
 loading.value = true
 
@@ -19,7 +20,7 @@ const user = computed(() => {
 const isLogged = computed(() => {
     const accessToken = store.getters.accessToken
 
-    if(accessToken) return true
+    if (accessToken) return true
     else return false
 })
 
@@ -36,17 +37,28 @@ onBeforeMount(async () => {
 
 <template>
     <!-- start main app area-->
-    <div v-if="!loading">
-        <Container>
-        <router-view></router-view>
-        </Container>
+    <div class="box-border" v-if="!loading">
+        <div class="flex w-full">
+            <Sidebar v-if="isLogged" />
+
+            <div class="mx-auto">
+                <div class="flex grow">
+                    <!--start content-->
+                    <Content>
+                        <router-view></router-view>
+                    </Content>
+                    <!--end content-->
+                </div>
+            </div>
+        </div>
+
 
         <!--start modals-->
-        <CreateKoolModal/>
+        <CreateKoolModal />
         <!--end modals-->
     </div>
     <div v-else>
-        <SplashScreen/>
+        <SplashScreen />
     </div>
     <!-- end main app area-->
 </template>

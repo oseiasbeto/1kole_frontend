@@ -1,9 +1,9 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
-import Input from '../components/UI/inputs/Input.vue';
-import SelectInput from '../components/UI/inputs/SelectInput.vue';
+import Input from '@/components/UI/inputs/Input.vue';
+import SelectInput from '@/components/UI/inputs/SelectInput.vue';
 import { useStore } from 'vuex';
-import SmallSpinner from '../components/UI/spinners/SmallSpinner.vue';
+import SmallSpinner from "@/components/UI/spinners/SmallSpinner.vue";
 import { useAuth } from '@/repositories/auth-repository';
 
 

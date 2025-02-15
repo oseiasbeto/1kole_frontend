@@ -1,10 +1,9 @@
 <script setup>
 import { useKool } from '@/repositories/kool-repository';
-import CreateKoolBox from './components/kools/CreateKoolBox.vue';
+import CreateKoolBox from '@/components/kools/CreateKoolBox.vue';
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
-import KoolList from './components/kools/KoolList.vue';
-import Cookies from "js-cookie";
+import KoolList from '@/components/kools/KoolList.vue';
 const { getKools, loading } = useKool()
 
 const store = useStore()
@@ -18,8 +17,8 @@ onMounted(async () => {
         await getKools({
             page: 1,
             limit: 10,
-            populate: 'author',
-            'parentKool[exists]': false
+            populate: 'author, parentKool',
+            isReply: false
         })
     } else return
 })
@@ -29,9 +28,12 @@ onMounted(async () => {
     <!--start content home page area-->
 
     <!--start create a post box area-->
-    <div class="max-w-xl overflow-hidden mx-auto border border-gray-200 rounded-2xl mt-2">
-        <CreateKoolBox />
+    <div class="px-4">
+        <div class="overflow-hidden border border-gray-200 rounded-2xl mt-2">
+            <CreateKoolBox />
+        </div>
     </div>
+
     <!--end create a post box area-->
 
     <!--start timeline area-->

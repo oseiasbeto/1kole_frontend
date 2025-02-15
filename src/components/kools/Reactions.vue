@@ -69,7 +69,7 @@ const openModal = (name, data) => {
 <template>
     <div class="flex justify-between mt-2 text-gray-500">
         <!-- Reply -->
-        <button @click="openModal('create kool', { parentKool: props.kool })"
+        <button @click="openModal('create kool', { parentKool: props.kool, isReply: true })"
             class="flex items-center gap-1 hover:text-blue-500 transition">
             <svg fill="none" width="18" viewBox="0 0 24 24" height="18"
                 style="color: rgb(111, 134, 159); pointer-events: none;">

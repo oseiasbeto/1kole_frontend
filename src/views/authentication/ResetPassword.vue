@@ -1,6 +1,6 @@
 <script setup>
 import { useStore } from 'vuex';
-import Input from './components/UI/inputs/Input.vue';
+import Input from '@/components/UI/inputs/Input.vue';
 import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useAuth } from '@/repositories/auth-repository';

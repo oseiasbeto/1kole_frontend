@@ -38,6 +38,15 @@ const routes = [
     },
     component: () => import('../views/home/KoolView.vue')
   },
+  {
+    name: 'Profile',
+    path: '/:username',
+    meta: {
+      requiresAuth: true,
+      title: 'Kool'
+    },
+    component: () => import('../views/home/Profile.vue')
+  },
 ]
 
 const router = createRouter({
@@ -47,8 +56,6 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title}`
-  window.scrollTo(0, 0)
-
   const token = Cookies.get("session_id")
 
   // Verifica se a rota que o usuário está tentando acessar requer autenticação

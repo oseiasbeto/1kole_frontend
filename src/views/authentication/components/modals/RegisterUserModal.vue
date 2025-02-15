@@ -12,7 +12,7 @@ import {
 import RegisterUserForn from "../../forms/RegisterUserForn.vue"
 
 import { useAuth } from '@/repositories/auth-repository';
-import SmallSpinner from "../UI/spinners/SmallSpinner.vue";
+import SmallSpinner from "@/components/UI/spinners/SmallSpinner.vue";
 
 const { register, loading, error } = useAuth()
 
