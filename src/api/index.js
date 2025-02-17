@@ -4,7 +4,7 @@ import store from "../store"
 import Cookies from "js-cookie"
 
 const instance = axios.create({
-    baseURL: 'https://api:1kole.com/v1',
+    baseURL: 'https://api.1kole.com/v1',
     headers: {
         'Content-Type': 'application/json'
     },
