@@ -48,10 +48,10 @@ const submit = async () => {
             }
             await register(user.value).then(() => {
                 close()
-                console.log(user.value)
                 store.dispatch("setModal", {
                     show: true,
                     name: "check account",
+                    hideProgressBar: true,
                     data: {
                         token: null,
                         user: user.value
@@ -97,7 +97,8 @@ const close = (name) => {
                         leave-to="opacity-0 scale-95">
                         <!--start body content-->
                         <DialogPanel class="w-full overflow-hidden text-left align-middle transition-all transform">
-                            <div class="bg-white w-[600px] rounded-[16px] shadow-lg flex flex-col max-h-[90vh]">
+                            <div
+                                class="bg-white w-screen h-screen lg:h-auto lg:w-[600px] lg:rounded-[16px] shadow-lg flex flex-col lg:max-h-[90vh]">
                                 <!--start header body-->
                                 <div v-if="!loading" class="px-3 py-1 flex justify-between items-center">
                                     <div>
@@ -132,9 +133,9 @@ const close = (name) => {
 
                                 <!--start footer body-->
                                 <div v-if="!loading" class="p-4 border-t border-gray-200">
-                                    <div class="mx-20">
+                                    <div class="lg:mx-20">
                                         <button :disabled="!isFormValid" @click="submit"
-                                            class="px-6 select-none mb-2 disabled:pointer-events-none disabled:bg-gray-300 disabled:text-gray-500 py-2.5 font-bold w-full rounded-full bg-gray-700 text-white  hover:opacity-80 focus:outline-none">
+                                            class="px-6 select-none mb-2 disabled:pointer-events-none disabled:bg-gray-300 disabled:text-gray-500 py-2.5 font-bold w-full rounded-full bg-black text-white  hover:opacity-80 focus:outline-none">
                                             Avançar
                                         </button>
                                         <div class="my-2">

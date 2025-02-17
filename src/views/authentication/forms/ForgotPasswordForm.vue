@@ -45,7 +45,7 @@ watch(isFormComplete, (isValid) => {
 
 <template>
     <div>
-        <div class="mx-20 py-3">
+        <div class="lg:mx-20 py-3">
             <div class="h-[50vh]">
                 <div>
                     <div class="mb-8">

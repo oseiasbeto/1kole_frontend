@@ -113,8 +113,12 @@ onMounted(() => {
 <template>
     <!--start content reset password page area-->
     <div>
-        <div>
-            <h1>Redefinir sua senha</h1>
+        <div class="p-5">
+            <div class="mb-5">
+                  <h1 class="text-2xl font-semibold mb-2">Redefinir sua senha</h1>
+                  <p class="text-muted text-base">Recupere o acesso à sua conta redefinindo sua senha com segurança.</p>
+            </div>
+          
 
             <div class="flex gap-2 flex-col justify-start">
                 <div class="w-full flex flex-col gap-4">

@@ -1,8 +1,7 @@
-import moment from 'moment';
-import 'moment/locale/pt-br'; // Importa o locale para português do Brasil
+const moment = require("moment");
 
-moment.locale('pt-br'); // Define o locale como pt-br
+function formatDate(date) {
+    return moment(date).locale('pt-br').format('D [de] MMMM [de] YYYY [às] HH:mm');
+ }
 
-export function formatDate(data) {
-  return moment(data).format('DD MMM - YYYY'); // Formato com mês abreviado
-}
+ module.exports = formatDate

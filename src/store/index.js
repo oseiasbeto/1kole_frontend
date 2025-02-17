@@ -7,12 +7,25 @@ export default createStore({
             data: [],
             metadata: {}
         },
+        users: {
+            data: [],
+            metadata: {}
+        },
+        usersSearch: {
+            data: [],
+            metadata: {}
+        },
+        notifications: {
+            data: [],
+            metadata: {}
+        },
         viewedKools: [],
         replies: {
             data: [],
             metadata: {}
         },
         user: {},
+        profile: {},
         accessToken: null,
         modal: {
             show: false,
@@ -37,6 +50,59 @@ export default createStore({
                 metadata: payload.metadata
             }
         },
+        ['SET_NOTIFICATIONS'](state, payload) {
+            state.notifications = {
+                data: payload.data,
+                metadata: payload.metadata
+            }
+        },
+        ['RESET_KOOLS'](state, payload) {
+            state.kools = {
+                data: [],
+                metadata: {}
+            }
+        },
+        ['SET_USERS_SEARCH'](state, payload) {
+            state.usersSearch = {
+                data: payload.users,
+                metadata: payload.metadata
+            }
+        },
+        ['SET_USERS_SEARCH'](state, payload) {
+            state.usersSearch = {
+                data: [],
+                metadata: {}
+            }
+        },
+        ['SET_USERS'](state, payload) {
+            state.users = {
+                data: payload.users,
+                metadata: payload.metadata
+            }
+        },
+        ['ADD_USER'](state, payload) {
+            state.users.data = [...state.users.data, ...payload.data]; // Adiciona os novos Kools
+            state.users.metadata = payload.metadata; // Atualiza metadados
+        },
+        ['ADD_KOOLS'](state, payload) {
+            state.kools.data = [...state.kools.data, ...payload.kools]; // Adiciona os novos Kools
+            state.kools.metadata = payload.metadata; // Atualiza metadados
+        },
+        ['RESET_KOOLS'](state, payload) {
+            state.kools.data = []; // Adiciona os novos Kools
+            state.kools.metadata = {}; // Atualiza metadados
+        },
+        ['REMOVE_KOOL_FROM_KOOLS'](state, koolId) {
+            // Filtra a lista para manter apenas os kools cujo _id não seja o koolId a remover
+            state.kools.data = state.kools.data.filter(k => k._id !== koolId);
+
+            // Atualize os metadados conforme necessário
+            state.kools.metadata.totalDocuments = state.kools.metadata.totalDocuments - 1;
+            // Recalcule currentPage e totalPages, se necessário:
+            const limit = state.kools.metadata.limit || 10;
+            state.kools.metadata.currentPage = state.kools.data.length > 0 ? Math.ceil(state.kools.data.length / limit) : 1;
+            state.kools.metadata.totalPages = Math.ceil(state.kools.metadata.totalDocuments / limit);
+        },
         ['STORE_KOOL_DATA'](state, { kool, replies }) {
             if (!kool || !kool._id) return;
 
@@ -47,6 +113,32 @@ export default createStore({
             } else {
                 state.viewedKools[existingKoolIndex].replies = replies;
             }
+        },
+        ['REMOVE_KOOL_FROM_VIEWED_KOOLS'](state, { koolId, replyId }) {
+            console.log(koolId, replyId)
+            console.log(state.viewedKools)
+            // Verifica se existe a estrutura esperada
+            if (!state.viewedKools) return;
+
+            // Remove o kool cujo _id seja igual a koolId
+            const index = state.viewedKools.findIndex(kool => kool._id === koolId)
+            console.log(index)
+            if (index === -1) return
+            // Atualiza o total de documentos
+            const viewedKools = state.viewedKools[index]
+
+
+            viewedKools.replies.kools = viewedKools.replies.kools.filter(kool => kool._id !== replyId);
+
+            /* 
+            viewedKools.replies.metadata.totalDocuments = viewedKools.replies.metadata.totalDocuments - 1;
+
+            // Recalcula currentPage e totalPages com base no novo array e no limite
+            const limit = viewedKools.replies.metadata.limit || 10;
+            viewedKools.replies.metadata.currentPage = viewedKools.replies.data.length > 0
+                ? Math.ceil(viewedKools.replies.data.length / limit)
+                : 1;
+            viewedKools.replies.metadata.totalPages = Math.ceil(viewedKools.replies.metadata.totalDocuments / limit);*/
         },
         ['ADD_REPLY_FROM_VIEWEDKOOLS'](state, { index, newReply }) {
             // Verifica se o índice é válido e se o array existe para evitar erros
@@ -84,6 +176,18 @@ export default createStore({
                 }
             };
         },
+        ['REMOVE_REPLY_FROM_REPLIES'](state, replyId) {
+            // Filtra a lista para manter apenas os replies cujo _id não seja o replyId a remover
+            state.replies.data = state.replies.data.filter(reply => reply._id !== replyId);
+
+            // Atualiza os metadados conforme necessário
+            state.replies.metadata.totalDocuments = state.replies.metadata.totalDocuments - 1;
+
+            // Recalcula currentPage e totalPages
+            const limit = state.replies.metadata.limit || 10;
+            state.replies.metadata.currentPage = state.replies.data.length > 0 ? Math.ceil(state.replies.data.length / limit) : 1;
+            state.replies.metadata.totalPages = Math.ceil(state.replies.metadata.totalDocuments / limit);
+        },
         ['SET_REPLIES'](state, payload) {
             state.replies = {
                 data: payload.kools,
@@ -108,6 +212,16 @@ export default createStore({
                 currentPage,
                 totalPages
             }
+
+            console.log(replies)
+        },
+        ['ADD_REPLIES'](state, payload) {
+            state.replies.data = [...state.replies.data, ...payload.kools]; // Adiciona os novos Kools
+            state.replies.metadata = {
+                currentPage: payload.metadata.currentPage,
+                totalDocuments: state.replies.metadata.totalDocuments,
+                totalPages: payload.metadata.totalPages,
+            }
         },
         ['UPDATE_REPLY_LIST'](state, { index, newReplyId }) {
             if (!state.replies || !state.replies.data || !Array.isArray(state.replies.data)) {
@@ -130,6 +244,9 @@ export default createStore({
         },
         ["SET_USER"](state, payload) {
             state.user = payload
+        },
+        ["SET_PROFILE"](state, payload) {
+            state.profile = payload
         },
         ["SET_ACCESS_TOKEN"](state, payload) {
             state.accessToken = payload
@@ -162,6 +279,7 @@ export default createStore({
             } else {
                 kool.likes.splice(index, 1);
             }
+            console.log(kool)
         },
         ["UPDATE_KOOL_REKOOLS"](state, userId) {
             const kool = state.kool
@@ -205,6 +323,7 @@ export default createStore({
             if (index === -1) {
                 reply.reKools.push(userId);
             } else {
+                console.log("Aki")
                 reply.reKools.splice(index, 1);
             }
         },
@@ -213,6 +332,18 @@ export default createStore({
             if (!kool) return;
             else {
                 kool.author.followers.push(followerId);
+            }
+        },
+        ["FOLLOW_USER"](state, followerId) {
+            const profile = state.profile;
+            if (!profile) return;
+            else {
+
+                if (!profile.followers.includes(followerId)) {
+                    profile.followers.push(followerId);
+                } else {
+                    profile.followers = profile.followers.filter(userId => userId !== followerId)
+                }
             }
         }
     },
@@ -228,6 +359,9 @@ export default createStore({
         },
         setUser({ commit }, payload) {
             commit('SET_USER', payload)
+        },
+        setProfile({ commit }, payload) {
+            commit('SET_PROFILE', payload)
         },
         setAccessToken({ commit }, payload) {
             commit('SET_ACCESS_TOKEN', payload)
@@ -251,6 +385,10 @@ export default createStore({
             return state.viewedKools.find(k => k._id === id) || null;
         },
         user: (state) => state.user,
+        notifications: (state) => state.notifications,
+        users: (state) => state.users,
+        usersSearch: (state) => state.usersSearch,
+        profile: (state) => state.profile,
         accessToken: (state) => state.accessToken,
         modal: (state) => state.modal,
         toast: (state) => state.toast,

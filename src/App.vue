@@ -7,6 +7,7 @@ import { useStore } from 'vuex';
 import CreateKoolModal from '@/components/UI/modals/CreateKoolModal.vue';
 import Sidebar from '@/components/UI/Sidebar.vue';
 import Content from './components/UI/Content.vue';
+import EditProfileModal from './components/UI/modals/EditProfileModal.vue';
 const { refreshToken, loading } = useAuth()
 loading.value = true
 
@@ -37,11 +38,11 @@ onBeforeMount(async () => {
 
 <template>
     <!-- start main app area-->
-    <div class="box-border" v-if="!loading">
-        <div class="flex w-full">
+    <div class="box-border overflow-x-hidden mb-14 lg:mb-0" v-if="!loading">
+        <div class="flex flex-col lg:flex-row w-full">
             <Sidebar v-if="isLogged" />
 
-            <div class="mx-auto">
+            <div class="lg:mx-auto">
                 <div class="flex grow">
                     <!--start content-->
                     <Content>
@@ -55,6 +56,7 @@ onBeforeMount(async () => {
 
         <!--start modals-->
         <CreateKoolModal />
+        <EditProfileModal/>
         <!--end modals-->
     </div>
     <div v-else>

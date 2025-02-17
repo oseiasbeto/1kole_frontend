@@ -43,9 +43,63 @@ const routes = [
     path: '/:username',
     meta: {
       requiresAuth: true,
-      title: 'Kool'
+      title: 'Perfil'
     },
     component: () => import('../views/home/Profile.vue')
+  },
+  {
+    name: 'Messages',
+    path: '/messages',
+    meta: {
+      requiresAuth: true,
+      title: 'Mensagens'
+    },
+    component: () => import('../views/home/Messages.vue')
+  },
+  {
+    name: 'Notifications',
+    path: '/notifications',
+    meta: {
+      requiresAuth: true,
+      title: 'Notificacoes'
+    },
+    component: () => import('../views/home/Notifications.vue')
+  },
+  {
+    name: 'Feeds',
+    path: '/feeds',
+    meta: {
+      requiresAuth: true,
+      title: 'Feeds'
+    },
+    component: () => import('../views/home/Feeds.vue')
+  },
+  {
+    name: 'Settings',
+    path: '/settings',
+    meta: {
+      requiresAuth: true,
+      title: 'Settings'
+    },
+    component: () => import('../views/home/Settings.vue')
+  },
+  {
+    name: 'Lists',
+    path: '/lists',
+    meta: {
+      requiresAuth: true,
+      title: 'Listas'
+    },
+    component: () => import('../views/home/Lists.vue')
+  },
+  {
+    name: 'Search',
+    path: '/search',
+    meta: {
+      requiresAuth: true,
+      title: 'Pesquisar'
+    },
+    component: () => import('../views/home/Search.vue')
   },
 ]
 

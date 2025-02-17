@@ -33,23 +33,24 @@ const close = () => {
 
 <template>
     <TransitionRoot appear :show="modal.show && modal.name == 'create kool'" as="div">
-        <Dialog as="div" class="relative z-[111]" @close="close()">
+        <Dialog as="div" class="relative z-[111]">
             <TransitionChild as="div" enter="duration-300 ease-out" enter-from="opacity-100"
                 leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
-                <div class="fixed inset-0 bg-black bg-opacity-25"></div>
+                <div class="fixed inset-0 bg-black bg-opacity-30"></div>
             </TransitionChild>
 
             <!--start body-->
             <div class="fixed inset-0 overflow-y-auto">
-                <div class="flex items-center justify-center min-h-full text-center">
+                <div class="flex lg:items-center lg:justify-center min-h-full text-center">
                     <TransitionChild as="div" enter="duration-300 ease-out" enter-from="opacity-0 scale-95"
                         enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
                         leave-to="opacity-0 scale-95">
                         <!--start body content-->
-                        <DialogPanel class="w-full overflow-hidden text-left align-middle transition-all transform">
-                            <div class="bg-white min-w-[600px] mx-w-[600px] rounded-[16px] shadow-lg flex flex-col max-h-[80vh]">
+                        <DialogPanel class="w-full lg:rounded-[16px] overflow-hidden text-left align-middle transition-all transform">
+                            <div
+                                class="bg-white w-screen lg:w-[500px] lg:mx-w-[600px]  shadow-lg flex flex-col max-h-[80vh]">
                                 <!--start header body-->
-                                <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                                <div class="px-4 py-2 flex justify-between items-center">
                                     <div>
                                         <button @click="close(modal.name)"
                                             class="flex items-center justify-center p-2 bg-white rounded-full hover:bg-gray-100 focus:outline-none transition-colors">
@@ -62,23 +63,23 @@ const close = () => {
                                             </svg>
                                         </button>
                                     </div>
-
                                 </div>
                                 <!--end header body-->
-                                
+
                                 <!--start content body-->
                                 <div
-                                    class="overflow-y-auto flex-1 max-h-[80vh] scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                                    <Kool 
-                                    v-if="modal.data.parentKool" 
-                                    :kool="modal.data.parentKool"
-                                    :show-reactions="false"
-                                    :show-author-username="false"
-                                    :readonly="true"
-                                    :is-reply="false"
-                                    :show-border="false"
-                                    />
-                                   <CreateKoolBox :is-reply="modal.data.isReply" :should-add-reply="modal.data.shouldAddReply ?? true" :originalKool="modal.data.parentKool"/>
+                                    class="overflow-y-auto flex-1 max-h-screen lg:max-h-[80vh] scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+                                    <Kool v-if="modal.data.parentKool" :kool="modal.data.parentKool"
+                                        :show-reactions="false" :show-author-username="false" :readonly="true"
+                                        :is-blocked="true" 
+                                        :show-username="false"
+                                        :show-border="false" :show-line-thread="true" 
+                                        :show-media="false"
+                                        />
+                                    <CreateKoolBox 
+                                    :is-reply="modal.data.isReply" :show-line-thread="true"
+                                    :should-add-reply="modal.data.shouldAddReply || false"
+                                    :originalKool="modal.data.parentKool" />
                                 </div>
                                 <!--end content body-->
                             </div>

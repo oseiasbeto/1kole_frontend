@@ -38,7 +38,7 @@ const handleIsTokenValid = () => {
 
 <template>
     <div>
-        <div class="mx-20 py-3">
+        <div class="lg:mx-20 py-3">
             <div class="h-[50vh] mb-8">
                 <div>
                     <h1 class="text-3xl mb-3 font-bold">

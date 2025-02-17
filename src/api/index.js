@@ -4,13 +4,12 @@ import store from "../store"
 import Cookies from "js-cookie"
 
 const instance = axios.create({
-    baseURL: 'http://localhost:5555/v1',
+    baseURL: 'https://api:1kole.com/v1',
     headers: {
         'Content-Type': 'application/json'
     },
     timeout: 60000
 })
-
 
 instance.interceptors.request.use((config) => {
     const hasLogged = store.getters.hasLogged
@@ -23,7 +22,7 @@ instance.interceptors.request.use((config) => {
 }, (error) => {
     return Promise.reject(error)
 })
-/*
+
 // Interceptor de resposta
 instance.interceptors.response.use(
     response => response,
@@ -49,20 +48,19 @@ instance.interceptors.response.use(
     response => response,
     error => {
         if (error.response?.status === 404) {
-            window.location.href = '/404';
+            window.location.href = '/';
         }
         return Promise.reject(error);
     }
 );
 
-
 instance.interceptors.response.use(
     response => response,
     error => {
         if (error.response?.status === 500) {
-            window.location.href = '/500';
+            window.location.href = '/';
         }
         return Promise.reject(error);
     }
-);*/
+);
 export default instance

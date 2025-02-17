@@ -5,7 +5,11 @@ module.exports = {
     extend: {
       colors: {
         primary: "#1d9bf0",
-        liked: "#ec4899",
+        border: "rgb(207, 217, 222)",
+        light: "rgba(0,0,0,0.04)",
+        title: "rgb(15, 20, 25)",
+        muted: "#536471",
+        liked: "#f91880",
         reKooled: "#00ba7c"
       },
       fontFamily: {

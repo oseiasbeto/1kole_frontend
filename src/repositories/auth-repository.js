@@ -135,6 +135,23 @@ export function useAuth() {
         }
     }
 
+    const logout = async (session_id) => {
+        try {
+            loading.value = true
+            await api.delete("/users/session/"+session_id)
+
+            store.dispatch("setUser", null)
+            store.dispatch("setAccessToken", null)
+            clearRefreshToken()
+        } catch (err) {
+            console.log(err.message)
+            throw err
+        } finally {
+            loading.value = false;
+        }
+
+    }
+
     // tem como finalidade refrescar o token de acesso
     const refreshToken = async (sessionId) => {
         try {
@@ -169,6 +186,7 @@ export function useAuth() {
         forgotPassword,
         resetPassword,
         refreshToken,
+        logout,
         auth
     }
 }

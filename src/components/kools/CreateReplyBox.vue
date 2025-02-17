@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import Avatar from '../UI/Avatar.vue';
 
 const props = defineProps({
     kool: {
@@ -30,7 +31,8 @@ const isOwnKool = computed(() => {
 
 <template>
     <div @click="replyTo"
-        class="py-2 px-3 cursor-pointer select-none text-sm rounded-full w-full bg-gray-100 text-gray-500">
+        class="py-2 px-2 bg-white lg:hover:bg-light w-screen lg:w-full lg:relative flex items-center gap-1.5 cursor-pointer select-none text-sm lg:rounded-full text-gray-500">
+        <Avatar custom="w-6 h-6" :url="user?.profileImage.url"/>
         <p>Responder {{ isOwnKool ? 'a si mesmo' : `ao: @${kool.author.username}` }}</p>
     </div>
 </template>
