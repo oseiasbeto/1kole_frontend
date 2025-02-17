@@ -6,7 +6,7 @@ import VueLazyload from 'vue-lazyload'
 // Importa todos os estoçps da aplicação
 import "vue3-toastify/dist/index.css"
 //import "vue-multiselect/dist/vue-multiselect.css";
-import "./styles.css";
+import "./output.css";
 
 
 const app = createApp(App)
