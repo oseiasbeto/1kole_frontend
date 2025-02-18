@@ -136,8 +136,9 @@ onMounted(() => {
                     </div>
 
                     <button :disabled="loading" @click="submit"
-                        class="w-min whitespace-nowrap text-sm font-semibold rounded-full px-4 py-2 bg-[rgb(29,155,240)] text-white hover:bg-blue-500 active:bg-[rgb(29,155,240)] transition">Redefinir
-                        a senha</button>
+                        class="w-min whitespace-nowrap text-sm font-semibold rounded-full px-4 py-2 bg-[rgb(29,155,240)] text-white hover:bg-blue-500 disabled:opacity-80 active:bg-[rgb(29,155,240)] transition">
+                        {{ loading ? 'Processando...' : 'Redefinir a senha' }}
+                    </button>
                 </div>
             </div>
 
