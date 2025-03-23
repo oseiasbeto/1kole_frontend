@@ -307,40 +307,19 @@ watch(() => props.video.url, (newUrl, oldUrl) => {
 <template>
   <div class="relative w-full max-h-[506px] bg-black">
     <!-- Vídeo -->
-    <video
-      ref="videoRef"
-      :poster="props.video.thumbnail || defaultThumb"
-      class="w-full h-full object-cover"
-      @click="togglePlay"
-      @dblclick="doubleClickLike"
-      @timeupdate="updateProgress"
-      @ended="onVideoEnded"
-      @waiting="onWaiting"
-      @playing="onPlaying"
-      preload="metadata"
-    ></video>
+    <video ref="videoRef" :poster="props.video.thumbnail || defaultThumb" class="w-full h-full object-cover"
+      @click="togglePlay" @dblclick="doubleClickLike" @timeupdate="updateProgress" @ended="onVideoEnded"
+      @waiting="onWaiting" @playing="onPlaying" preload="metadata"></video>
 
     <!-- Efeito de like -->
-    <div
-      v-if="showLikeEffect"
-      class="absolute w-12 h-12 bg-red-500 bg-center bg-contain opacity-90 animate-like"
-      :style="{ top: likePosition?.y + 'px', left: likePosition?.x + 'px' }"
-    ></div>
+    <div v-if="showLikeEffect" class="absolute w-12 h-12 bg-red-500 bg-center bg-contain opacity-90 animate-like"
+      :style="{ top: likePosition?.y + 'px', left: likePosition?.x + 'px' }"></div>
 
     <!-- Botão de play/pause -->
-    <div
-      v-if="!isPlaying"
-      @click="togglePlay"
-      class="absolute inset-0 flex items-center justify-center"
-      :class="{ 'pointer-events-none opacity-50': globalVideoState.getActiveVideo() && globalVideoState.getActiveVideo() !== videoRef.value }"
-    >
+    <div v-if="!isPlaying" @click="togglePlay" class="absolute inset-0 flex items-center justify-center"
+      :class="{ 'pointer-events-none opacity-50': globalVideoState.getActiveVideo() && globalVideoState.getActiveVideo() !== videoRef.value }">
       <div class="bg-black bg-opacity-50 rounded-full p-4">
-        <svg
-          class="w-12 h-12 text-white"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M5 3l14 9-14 9V3z" />
         </svg>
       </div>
@@ -351,77 +330,55 @@ watch(() => props.video.url, (newUrl, oldUrl) => {
       <div class="text-white text-sm">
         {{ currentTimeFormatted }} / {{ durationFormatted }}
       </div>
-      <div
-        class="flex-1 h-1 bg-white bg-opacity-30 cursor-pointer"
-        @click="seekVideo"
-      >
-        <div
-          v-if="isBuffering"
-          class="h-full bg-white bg-opacity-50 animate-pulse"
-        ></div>
-        <div
-          v-else
-          :style="{ width: progress + '%' }"
-          class="h-full bg-white rounded-lg transition-all duration-100"
-        ></div>
+      <div class="flex-1 h-1 bg-white bg-opacity-30 cursor-pointer" @click="seekVideo">
+        <div v-if="isBuffering" class="h-full bg-white bg-opacity-50 animate-pulse"></div>
+        <div v-else :style="{ width: progress + '%' }" class="h-full bg-white rounded-lg transition-all duration-100">
+        </div>
       </div>
     </div>
 
     <!-- Botão de mute -->
-    <button
-      @click="toggleMute"
-      class="absolute top-4 right-12 text-white bg-black bg-opacity-50 rounded-full p-2"
-    >
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+    <button @click="toggleMute" class="absolute top-4 right-12 text-white bg-black bg-opacity-50 rounded-full p-2">
+      <svg v-if="isMuted" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="-0.5 0 25 25" fill="none">
         <path
-          v-if="isMuted"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="M3 3l18 18M11 5a4 4 0 014 4v6a4 4 0 01-4 4v-3m0-8v3m-6 2h3l3-3v6l-3-3H5V9z"
-        />
+          d="M10.9395 17.72C12.9395 19.5 15.3895 20.72 16.5495 20.33C18.6495 19.55 18.9995 15.3299 18.9995 12.4099C18.9995 11.5999 18.9995 10.68 18.8895 9.77002"
+          stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         <path
-          v-else
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="M5 9v6h3l3-3v6l-3-3H5zm10-4v2a2 2 0 012 2v4a2 2 0 01-2 2v-2m-4-7v12"
-        />
+          d="M18.1292 6.28008C18.0012 5.89129 17.795 5.53273 17.5233 5.22661C17.2516 4.9205 16.9201 4.67327 16.5493 4.50005C15.3193 4.04005 12.7093 5.49996 10.5493 7.40996H8.94922C7.88835 7.40996 6.87093 7.83145 6.12079 8.58159C5.37064 9.33174 4.94922 10.3491 4.94922 11.41V13.41C4.9489 14.1811 5.17151 14.936 5.59021 15.5835C6.00892 16.2311 6.60585 16.7438 7.3092 17.06"
+          stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M22 2.42004L2 22.42" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+
+      <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="-0.5 0 25 25" fill="none">
+        <path
+          d="M12.5493 4.50005C11.3193 4.04005 8.70926 5.49996 6.54926 7.40996H4.94922C3.88835 7.40996 2.87093 7.83145 2.12079 8.58159C1.37064 9.33174 0.949219 10.3491 0.949219 11.41V13.41C0.949219 14.4708 1.37064 15.4883 2.12079 16.2385C2.87093 16.9886 3.88835 17.41 4.94922 17.41H6.54926C8.65926 19.35 11.2693 20.78 12.5493 20.33C14.6493 19.55 14.9992 15.33 14.9992 12.41C14.9992 9.48996 14.6493 5.28005 12.5493 4.50005Z"
+          stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path
+          d="M20.6602 6.71997C22.1593 8.22011 23.0015 10.2542 23.0015 12.375C23.0015 14.4958 22.1593 16.5299 20.6602 18.03"
+          stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path
+          d="M18.5391 15.95C19.4764 15.0123 20.003 13.7407 20.003 12.4149C20.003 11.0891 19.4764 9.81764 18.5391 8.88"
+          stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </button>
 
     <!-- Botão de fullscreen -->
-    <button
-      @click="toggleFullscreen"
-      class="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2"
-    >
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+    <button @click="toggleFullscreen" class="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+        <path d="M6 9.99739C6.01447 8.29083 6.10921 7.35004 6.72963 6.72963C7.35004 6.10921 8.29083 6.01447 9.99739 6"
+          stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
         <path
-          v-if="!isFullscreen"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="M7 3H3v4m14-4h4v4m-4 10h4v4m-14-4h-4v-4"
-        />
+          d="M6 14.0007C6.01447 15.7072 6.10921 16.648 6.72963 17.2684C7.35004 17.8888 8.29083 17.9836 9.99739 17.998"
+          stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
         <path
-          v-else
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="M3 7V3h4m14-4v4h-4m-10 14H3v4m14-4h4v-4"
-        />
+          d="M17.9976 9.99739C17.9831 8.29083 17.8883 7.35004 17.2679 6.72963C16.6475 6.10921 15.7067 6.01447 14.0002 6"
+          stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
+        <path
+          d="M17.9976 14.0007C17.9831 15.7072 17.8883 16.648 17.2679 17.2684C16.6475 17.8888 15.7067 17.9836 14.0002 17.998"
+          stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
+        <path
+          d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8"
+          stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
       </svg>
     </button>
   </div>
