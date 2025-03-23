@@ -182,7 +182,7 @@ watch(() => route.params.username, async (newId, oldId) => {
                     </svg>
                 </button>
                 <img class="w-full h-full z-[1px] pointer-events-none object-cover absolute top-0 right-0 left-0"
-                    v-if="profile?.coverPhoto.url" v-lazy="profile?.coverPhoto.url">
+                    v-if="profile?.coverPhoto?.url || profile?.coverPhoto?.low" v-lazy="profile?.coverPhoto.url || profile?.coverPhoto?.low">
             </div>
             <!--end background image area-->
 
@@ -312,7 +312,7 @@ watch(() => route.params.username, async (newId, oldId) => {
 
             <!--start avatar area-->
             <div class="absolute rounded-full w-[90px] h-[90px] top-[110px] left-[10px]">
-                <avatar :url="profile.profileImage.url" custom="w-full h-full border-none bg-white ring-4 ring-white" />
+                <avatar :url="profile?.profileImage?.url || profile?.profileImage?.low" custom="w-full h-full border-none bg-white ring-4 ring-white" />
                 <div v-if="profile.verified" class="flex relative">
                     <div class="absolute bottom-0 right-0"><span class="verified-icon" data-testid="verified-badge">
                             <div class="relative flex shrink-0 flex-col" data-testid="icon"><svg width="24" height="24"

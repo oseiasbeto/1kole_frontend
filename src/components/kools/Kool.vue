@@ -144,7 +144,7 @@ const handleOpenModal = (data) => {
                     <router-link @click.stop :to="'/' + props.kool.author.username"
                         class="flex flex-col relative pr-[10px]">
                         <avatar size="w-[42px] flex-shrink-0 h-[42px]" 
-                        :url="props.kool?.author?.profileImage.url" />
+                        :url="props.kool?.author?.profileImage.url || props.kool?.author?.profileImage.low" />
                         <div v-if="props.showLineThread" class="w-0.5 flex-shrink-0 bg-border mt-1 mx-auto grow"></div>
                     </router-link>
                     <!--end avatar area-->

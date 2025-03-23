@@ -237,7 +237,7 @@ watch(() => route.params.id, async (newId, oldId) => {
         <div class="flex mb-3 items-center justify-between">
           <div class="flex gap-2 flex-row items-center">
             <router-link :to="'/' + kool?.author.username" class="flex-1">
-              <Avatar size="w-[42px] flex-shrink-0 h-[42px]" :url="kool?.author.profileImage.url" />
+              <Avatar size="w-[42px] flex-shrink-0 h-[42px]" :url="kool?.author?.profileImage?.url || kool?.author?.profileImage.low" />
             </router-link>
             <div class="block">
               <div class="flex items-center">
