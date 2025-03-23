@@ -193,7 +193,7 @@ watch(() => route.params.username, async (newId, oldId) => {
                     <Menu as="div" @click.stop class="relative inline-block text-left">
                         <div class="z-[10px]">
                             <MenuButton id="more" @click.stop
-                                class="flex justify-center text-muted items-center border border-border hover:bg-light rounded-full w-[34px] h-[32px]">
+                                class="flex justify-center text-muted items-center border border-transparent text-primary bg-primary/10 rounded-full w-[34px] h-[32px]">
                                 <svg fill="none" width="16" viewBox="0 0 24 24" height="16">
                                     <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
                                         d="M2 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm16 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm-6-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z">
@@ -241,12 +241,12 @@ watch(() => route.params.username, async (newId, oldId) => {
                     </Menu>
 
                     <button @click="followAuthor(profile?._id)" :disabled="followUserLoading" v-if="!itsMe"
-                        class="flex text-sm border bg-primary border-primary text-white font-semibold gap-2 justify-center  items-center bg-light-dark hover:opacity-80 rounded-full py-1 px-5"
-                        :class="{ 'bg-white hover:bg-light !text-title !border-border': isFollowing }">
+                        class="flex text-sm border bg-primary border-primary text-white font-semibold gap-2 justify-center items-center bg-light-dark hover:opacity-80 rounded-full py-1 px-5"
+                        :class="{ 'border-transparent !text-primary bg-primary/10': isFollowing }">
                         <p class="mb-[3px]">{{ isFollowing ? 'Seguindo' : '+Seguir' }}</p>
                     </button>
                     <button v-else @click="editProfile"
-                        class="flex text-sm border bg-white hover:bg-light text-title border-border font-semibold gap-2 justify-center  items-center bg-light-dark hover:opacity-80 rounded-full py-1 px-5">
+                        class="flex text-sm border border-transparent text-primary bg-primary/10 font-semibold gap-2 justify-center items-center bg-light-dark hover:opacity-80 rounded-full py-1 px-5">
                         <p class="mb-[3px]">Editar perfil</p>
                     </button>
                 </div>
@@ -254,43 +254,31 @@ watch(() => route.params.username, async (newId, oldId) => {
 
                 <!--start content area-->
                 <div class="pt-4 gap-0.5 w-full pb-2">
-                    <div
-                        class="text-title flex items-center gap-0.5 truncate text-[26px] lg:text-[32px] leading-10 font-bold">
-                        <p class=" leading-8 whitespace-break-spaces">
+                    <div class="text-title flex items-center gap-0.5 truncate text-lg ">
+                        <p class="font-bold whitespace-break-spaces">
                             {{ profile.name }}
-                            <span v-if="profile.verified"
-                                class="max-w-[24px] text-[#1d9bf0] inline-flex ml-0.5 items-center justify-center h-[24px]">
-                                <svg viewBox="0 0 22 22" fill="currentColor" width="22px" height="22px"
-                                    aria-label="Conta verificada" role="img" class="mt-[2px]"
-                                    data-testid="icon-verified">
-                                    <g>
-                                        <path
-                                            d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.606-.274 1.263-.144 1.896.13.634.433 1.218.877 1.688.47.443 1.054.747 1.687.878.633.132 1.29.084 1.897-.136.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.239 1.266.296 1.903.164.636-.132 1.22-.447 1.68-.907.46-.46.776-1.044.908-1.681s.075-1.299-.165-1.903c.586-.274 1.084-.705 1.439-1.246.354-.54.551-1.17.569-1.816zM9.662 14.85l-3.429-3.428 1.293-1.302 2.072 2.072 4.4-4.794 1.347 1.246z">
-                                        </path>
-                                    </g>
-                                </svg>
-                            </span>
                         </p>
 
                     </div>
-                    <div class="text-base truncate overflow-hidden break-words text-ellipsis max-w-full text-muted">
+                    <div
+                        class="text-sm text-gray truncate overflow-hidden break-words text-ellipsis max-w-full text-muted">
                         @{{ profile.username }}
                     </div>
                 </div>
 
                 <div class="flex items-center gap-2">
                     <router-link class="flex text-base hover:underline items-center gap-1" to="#">
-                        <span class="font-semibold text-light-text">{{ formatCount(followersCount) }}</span>
-                        <span class="text-muted">{{ followersCount == 1 ? 'Seguidor' : 'seguidores' }}</span>
+                        <span class="font-bold">{{ formatCount(followersCount) }}</span>
+                        <span class="text-gray">{{ followersCount == 1 ? 'Seguidor' : 'seguidores' }}</span>
                     </router-link>
                     <router-link class="flex text-base hover:underline items-center gap-1" to="#">
-                        <span class="font-semibold text-light-text">{{ formatCount(followingCount) }}</span>
-                        <span class="text-muted">seguindo</span>
+                        <span class="font-bold">{{ formatCount(followingCount) }}</span>
+                        <span class="text-gray">seguindo</span>
                     </router-link>
                 </div>
 
-                <div v-if="profile.bio.length" class="pt-2 pb-1">
-                    <paragraph custom="text-base text-light-text leading-[21px]" :txt="profile.bio" />
+                <div v-if="profile.bio.length" class="pt-2.5 pb-1">
+                    <paragraph custom="text-sm !text-gray leading-[21px]" :txt="profile.bio" />
                 </div>
                 <!--end content area-->
             </div>
@@ -324,7 +312,26 @@ watch(() => route.params.username, async (newId, oldId) => {
 
             <!--start avatar area-->
             <div class="absolute rounded-full w-[90px] h-[90px] top-[110px] left-[10px]">
-                <avatar :url="profile.profileImage.url" custom="w-full h-full" />
+                <avatar :url="profile.profileImage.url" custom="w-full h-full border-none bg-white ring-4 ring-white" />
+                <div v-if="profile.verified" class="flex relative">
+                    <div class="absolute bottom-0 right-0"><span class="verified-icon" data-testid="verified-badge">
+                            <div class="relative flex shrink-0 flex-col" data-testid="icon"><svg width="24" height="24"
+                                    viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                    class="w-4 text-verified !size-6 rounded-full bg-white ring-2 ring-white dark:bg-primary-900 dark:ring-gray-900"
+                                    data-testid="svg-icon">
+                                    <title>Verified Account</title>
+                                    <path
+                                        d="M8.82.521a1.596 1.596 0 012.36 0l.362.398c.42.46 1.07.635 1.664.445l.512-.163a1.596 1.596 0 012.043 1.18l.115.525a1.596 1.596 0 001.218 1.218l.525.115a1.596 1.596 0 011.18 2.043l-.163.513a1.596 1.596 0 00.446 1.663l.397.362a1.596 1.596 0 010 2.36l-.397.362c-.461.42-.635 1.07-.446 1.664l.163.512a1.596 1.596 0 01-1.18 2.043l-.525.115a1.596 1.596 0 00-1.218 1.218l-.115.525a1.596 1.596 0 01-2.043 1.18l-.512-.163a1.596 1.596 0 00-1.664.445l-.362.398a1.596 1.596 0 01-2.36 0l-.362-.398a1.596 1.596 0 00-1.663-.445l-.513.163a1.596 1.596 0 01-2.043-1.18l-.115-.525a1.596 1.596 0 00-1.218-1.218l-.525-.115a1.596 1.596 0 01-1.18-2.043l.164-.512a1.596 1.596 0 00-.446-1.664L.52 11.18a1.596 1.596 0 010-2.36l.398-.362c.46-.42.635-1.07.446-1.663L1.2 6.282a1.596 1.596 0 011.18-2.043l.525-.115a1.596 1.596 0 001.218-1.218l.115-.525A1.596 1.596 0 016.282 1.2l.513.163c.594.19 1.244.015 1.663-.445L8.821.52z"
+                                        fill="currentColor"></path>
+                                    <path
+                                        d="M6.66 7.464L5.012 9.111l3.85 3.85 5.483-5.481-1.966-1.966L8.544 9.35 6.66 7.464z"
+                                        fill="#fff"></path>
+                                    <path opacity=".5"
+                                        d="M11.25 15.55l-1.646-1.848 1.646-1.646 1.887 1.887-1.887 1.606z" fill="#fff">
+                                    </path>
+                                </svg></div>
+                        </span></div>
+                </div>
             </div>
             <!--end avatar area-->
         </div>

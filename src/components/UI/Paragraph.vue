@@ -15,6 +15,6 @@ const props = defineProps({
 </script>
 
 <template>
-    <div :class="custom" class="text-[rgb(15,20,25)] max-w-full flex w-full overflow-hidden whitespace-pre-wrap break-words" v-html="convertTextToLinks(props.txt)">
+    <div :class="custom" class="text-title max-w-full flex w-full overflow-hidden whitespace-pre-wrap break-words" v-html="props.txt">
     </div>
 </template>

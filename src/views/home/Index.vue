@@ -82,7 +82,7 @@ const onLoadMore = async (page) => {
         <!--end tabs area-->
 
         <!--start timeline area-->
-        <div v-if="!loading">
+        <div class="h-full" v-if="!loading">
             <KoolList v-if="kools.data.length" :load-more-loading="loadMoreLoading" :kools="kools.data" :is-replies="false"
                 :metadata="kools.metadata" @load-more="onLoadMore" />
             <div class="h-[40vh]" v-else>

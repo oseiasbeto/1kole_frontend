@@ -77,6 +77,7 @@ const close = () => {
                                         :show-media="false"
                                         />
                                     <CreateKoolBox 
+                                    @close="close(modal.name)"
                                     :is-reply="modal.data.isReply" :show-line-thread="true"
                                     :should-add-reply="modal.data.shouldAddReply || false"
                                     :originalKool="modal.data.parentKool" />

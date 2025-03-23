@@ -7,8 +7,7 @@ const instance = axios.create({
     baseURL: 'https://api.1kole.com/v1',
     headers: {
         'Content-Type': 'application/json'
-    },
-    timeout: 60000
+    }
 })
 
 instance.interceptors.request.use((config) => {

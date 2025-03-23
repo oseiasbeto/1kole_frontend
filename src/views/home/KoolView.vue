@@ -243,7 +243,7 @@ watch(() => route.params.id, async (newId, oldId) => {
               <div class="flex items-center">
                 <p class="text-base text-title leading-[21px] font-semibold">{{ kool?.author.name }}</p>
                 <span v-if="kool.author.verified"
-                  class="max-w-[20px] text-[#1d9bf0] ml-0.5 flex items-center justify-center h-[20px]">
+                  class="max-w-[20px] text-verified ml-0.5 flex items-center justify-center h-[20px]">
                   <svg viewBox="0 0 22 22" fill="currentColor" width="17px" height="17px" aria-label="Conta verificada"
                     role="img" class="mt-[2px]" data-testid="icon-verified">
                     <g>
@@ -280,7 +280,7 @@ watch(() => route.params.id, async (newId, oldId) => {
           <p>{{ formatDate(kool?.createdAt) }}</p>
         </div>
 
-        <div class="flex gap-3 border-t border-b border-light-border mt-3 py-3">
+        <div class="flex gap-3 border-t border-b border-border mt-3 py-3">
           <p class="text-[rgb(83,100,113)] text-base">
             <strong class="text-title font-semibold">{{ formatCount(repostCount) }}</strong>
             <span class="ml-1">{{ repostCount === 1 ? 'rekool' : 'rekools' }}</span>

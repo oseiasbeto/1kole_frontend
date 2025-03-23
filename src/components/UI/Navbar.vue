@@ -27,7 +27,7 @@ const goBack = () => {
 </script>
 
 <template>
-    <header class="bg-white z-10 sticky top-0 flex items-center px-5 py-1 min-h-[52px] border-b border-light-border">
+    <header class="bg-white z-10 sticky top-0 flex items-center px-5 py-1 min-h-[52px] border-b border-border">
         <div class="flex gap-3 items-center flex-shrink-0">
             <button @click="goBack" v-if="props.showGoBackBtn" class="w-8 h-8 rounded-full flex justify-center items-center hover:bg-light">
                 <svg fill="none" width="24px" viewBox="0 0 24 24" height="24px">

@@ -38,7 +38,7 @@ onBeforeMount(async () => {
 
 <template>
     <!-- start main app area-->
-    <div class="box-border overflow-x-hidden mb-14 lg:mb-0" v-if="!loading">
+    <div class="box-border text-title font-primary overflow-x-hidden mb-14 lg:mb-0" v-if="!loading">
         <div class="flex flex-col lg:flex-row w-full">
             <Sidebar v-if="isLogged" />
 

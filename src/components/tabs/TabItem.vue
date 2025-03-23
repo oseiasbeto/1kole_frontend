@@ -18,12 +18,11 @@ const handlePress = () => {
 </script>
 
 <template>
-    <li @click="handlePress" class="px-[14px] cursor-pointer pt-[14px] grow hover:bg-light">
-        <div class="text-center relative font-semibold">
-            <p class="relative whitespace-nowrap text-[15px] w-min mx-auto leading-5 pb-[13px]" :class="props.active ? 'text-title' : 'text-muted'">
-                {{ props.title }}
-                <span v-show="props.active" class="bg-primary absolute w-full left-0 bottom-0 h-[4px] rounded-[30px]"></span>
-            </p>
-        </div>
+    <li @click="handlePress"
+        class="flex relative cursor-pointer flex-1 items-center justify-center gap-x-1 whitespace-nowrap px-4 py-2 pt-3 text-center text-sm font-medium hover:text-title dark:text-gray-600 dark:hover:text-gray-50 text-gray-900 dark:text-gray-100"
+        :class="props.active ? 'text-title' : 'text-gray'">
+        {{ props.title }}
+
+        <div v-show="props.active" class="absolute bottom-[-3px] z-[2] h-[3px] bg-primary transition-all duration-200 dark:bg-primary-400 w-full"></div>
     </li>
 </template>

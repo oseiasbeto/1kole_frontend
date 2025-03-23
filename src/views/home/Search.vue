@@ -19,7 +19,8 @@ const filter = ref({
     page: 1,
     limit: 25,
     following: { nin: [user.value._id] },  // Filtra pessoas que não seguem o usuário atual
-    _id: { ne: user.value._id }  // Exclui o usuário atual da consulta
+    _id: { ne: user.value._id },  // Exclui o usuário atual da consulta,
+    status: "active"
 })
 
 const keywords = ref("")
