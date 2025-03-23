@@ -24,6 +24,7 @@ export default createStore({
             data: [],
             metadata: {}
         },
+        activeUploads: [], // Array de Promises de upload
         user: {},
         profile: {},
         accessToken: null,
@@ -293,6 +294,12 @@ export default createStore({
                 kool.reKools.splice(index, 1);
             }
         },
+        ADD_UPLOAD(state, uploadPromise) {
+            state.activeUploads.push(uploadPromise);
+        },
+        REMOVE_UPLOAD(state, uploadPromise) {
+            state.activeUploads = state.activeUploads.filter(p => p !== uploadPromise);
+        },
         ["TOGGLE_REPOST_KOOLS"](state, { koolId, userId }) {
             const kool = state.kools.data.find(k => k._id === koolId);
             if (!kool) return;
@@ -371,6 +378,16 @@ export default createStore({
         },
         storeKoolData({ commit }, { kool, replies }) {
             commit("STORE_KOOL_DATA", { kool, replies });
+        },
+        addUpload({ commit }, uploadPromise) {
+            commit('ADD_UPLOAD', uploadPromise);
+            uploadPromise
+                .then(() => {
+                    commit('REMOVE_UPLOAD', uploadPromise);
+                })
+                .catch(() => {
+                    commit('REMOVE_UPLOAD', uploadPromise);
+                });
         },
         setToast({ commit }, payload) {
             commit('SET_TOAST', payload)
