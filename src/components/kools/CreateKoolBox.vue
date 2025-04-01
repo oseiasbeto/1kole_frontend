@@ -136,6 +136,19 @@ const removeMedia = (index) => {
   uploadProgress.value = newProgress;
 };
 
+const getVideoDuration = (url) => {
+  return new Promise((resolve) => {
+    const video = document.createElement('video');
+    video.src = url;
+    video.onloadedmetadata = () => {
+      resolve(video.duration);
+    };
+    video.onerror = () => {
+      resolve(null);
+    };
+  });
+};
+
 const uploadMedia = async (media) => {
   const source = axios.CancelToken.source();
   cancelTokens.value[media.id] = source;
@@ -173,13 +186,20 @@ const uploadMedia = async (media) => {
       ? `https://res.cloudinary.com/${CLOUD_NAME}/video/upload/sp_hd/${response.data.public_id}.m3u8`
       : null;
 
+
+    const thumbnailUrl = media.type === 'video' ?
+      `https://res.cloudinary.com/${CLOUD_NAME}/video/upload/w_${response.data.width},h_${response.data.height},c_fill,q_auto,f_jpg,so_2/${response.data.public_id}.jpg` :
+      null;
+
     return {
       public_id: response.data.public_id,
       url: media.type === 'video'
         ? hlsUrl
         : `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_80,w_1200/${response.data.public_id}`,
+      thumbnail: thumbnailUrl,
       type: media.type,
       format: media.type === 'video' ? 'm3u8' : response.data.format,
+      duration: media.type === 'video' ? await getVideoDuration(response.data.secure_url) : null
     };
   } catch (error) {
     if (axios.isCancel(error)) return null;
@@ -216,6 +236,8 @@ const submit = async () => {
         url: media.url,
         type: media.type,
         format: media.format,
+        thumbnail: media.thumbnail,
+        duration: media.duration
       }));
     } catch (err) {
 

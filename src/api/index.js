@@ -5,7 +5,7 @@ import Cookies from "js-cookie"
 
 const node_env = 'prod'
 const instance = axios.create({
-    baseURL: node_env == 'dev' ? 'http://localhost:5050/v1' : 'https://api.1kole.com/v1',
+    baseURL: node_env == 'dev' ? 'http://localhost:5555/v1' : 'https://api.1kole.com/v1',
     headers: {
         'Content-Type': 'application/json'
     }
@@ -63,4 +63,5 @@ instance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
 export default instance
