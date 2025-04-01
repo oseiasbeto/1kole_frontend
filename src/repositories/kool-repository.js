@@ -74,11 +74,7 @@ export function useKool() {
             loading.value = true; // Ativa o estado de carregamento
 
             // Faz a requisição para criar um Kool
-            const response = await api.post("/kools", data.formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                }
-            });
+            const response = await api.post("/kools", data);
 
             if (!response.data.kool.parentKool) {
                 const kools = store.getters.kools || { data: [], metadata: {} };

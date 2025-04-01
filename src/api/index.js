@@ -3,8 +3,9 @@ import { Promise } from 'core-js'
 import store from "../store"
 import Cookies from "js-cookie"
 
+const node_env = 'prod'
 const instance = axios.create({
-    baseURL: 'https://api.1kole.com/v1',
+    baseURL: node_env == 'dev' ? 'http://localhost:5050/v1' : 'https://api.1kole.com/v1',
     headers: {
         'Content-Type': 'application/json'
     }
