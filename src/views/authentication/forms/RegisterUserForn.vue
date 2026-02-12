@@ -204,8 +204,8 @@ watch(isFormComplete, (isValid) => {
                         </div>
 
                         <div>
-                            <h5 class="text-sm font-bold mb-1.5 text-gray-700">Data de nascimento</h5>
-                            <p class="text-sm text-gray-500 leading-tight">Isso não será exibido publicamente. Confirme
+                            <h5 class="text-sm font-bold mb-1.5 text-title">Data de nascimento</h5>
+                            <p class="text-sm text-gray leading-tight">Isso não será exibido publicamente. Confirme
                                 sua
                                 própria idade, mesmo se esta conta for de empresa, de um animal de estimação ou outros.
                             </p>

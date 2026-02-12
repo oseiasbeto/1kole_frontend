@@ -49,9 +49,9 @@ watch(isFormComplete, (isValid) => {
             <div class="h-[50vh]">
                 <div>
                     <div class="mb-8">
-                        <h1 class="text-3xl mb-3 font-bold">Esqueci a Senha</h1>
+                        <h1 class="text-3xl text-title mb-3 font-bold">Esqueci a Senha</h1>
 
-                        <p class="text-gray-500 leading-tight text-sm">Digite o e-mail que você usou para criar a sua conta. Nós lhe enviaremos um "código de redefinição" para que você possa definir uma nova senha.</p>
+                        <p class="text-gray leading-tight text-sm">Digite o e-mail que você usou para criar a sua conta. Nós lhe enviaremos um "código de redefinição" para que você possa definir uma nova senha.</p>
                     </div>
 
                     <div>

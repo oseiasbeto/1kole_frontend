@@ -60,7 +60,7 @@ watch(isFormComplete, (isValid) => {
             <div class="h-[50vh]">
                 <div>
                     <div class="mb-8">
-                        <h1 class="text-3xl font-bold">Fazer login</h1>
+                        <h1 class="text-3xl text-title font-bold">Fazer login</h1>
                     </div>
 
                     <div>

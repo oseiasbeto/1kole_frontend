@@ -128,7 +128,7 @@ const close = (name) => {
                                 <!--end loading body-->
 
                                 <!--start footer body-->
-                                <div v-if="!loading" class="p-4 border-t border-gray-200">
+                                <div v-if="!loading" class="p-4 border-t border-border">
                                     <div class="lg:mx-20">
                                         <button :disabled="!isFormValid" @click="submit"
                                             class="px-6 select-none mb-2 disabled:pointer-events-none disabled:bg-gray-300 disabled:text-gray-500 py-2.5 font-bold w-full rounded-full bg-black text-white  hover:opacity-80 focus:outline-none">

@@ -39,18 +39,18 @@ const handleIsTokenValid = () => {
 <template>
     <div>
         <div class="lg:mx-20 py-3">
-            <div class="h-[50vh] mb-8">
+            <div class="h-[50vh] pb-8">
                 <div>
-                    <h1 class="text-3xl mb-3 font-bold">
+                    <h1 class="text-3xl text-title mb-3 font-bold">
                         Enviamos um código para você
                     </h1>
 
-                    <p class="text-gray-500 leading-tight text-sm">Para garantir a segurança da sua conta, precisamos
+                    <p class="text-gray leading-tight text-sm">Para garantir a segurança da sua conta, precisamos
                         verificar seu e-mail. Digite o código de verificação que enviamos para o seu endereço
                         cadastrado.</p>
                 </div>
 
-                <div>
+                <div class="mt-3">
                     <div class="w-full mb-20 flex flex-col gap-4">
                         <div>
                             <Input @input="handleIsTokenValid" v-model="form.token"

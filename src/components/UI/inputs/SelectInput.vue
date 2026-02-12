@@ -31,7 +31,7 @@ const inputValue = defineModel()
     <div class="relative select-none h-14 w-full">
         <!-- Select -->
         <select :id="props.label" v-model="inputValue"
-            class="peer w-full h-full pt-3 px-3 text-sm border border-gray-300 rounded-[4px] focus:border-primary focus:border-2 outline-none transition-all text-gray-700 placeholder-transparent pr-10 appearance-none"
+            class="peer w-full h-full pt-3 px-3 bg-transparent text-sm border border-border rounded-[4px] focus:border-primary focus:border-2 outline-none transition-all text-gray-700 placeholder-transparent pr-10 appearance-none"
             required>
             <option value="" disabled selected hidden>{{ props.title }}</option>
             <option v-for="option in props.options" :key="option" :value="option.value">{{ option.label }}</option>
