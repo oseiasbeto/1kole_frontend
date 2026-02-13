@@ -7,7 +7,7 @@ export default [
             rootPage: "home",
             title: '1Kole - Conecte-se e compartilhe'
         },
-        component: () => import('../home/views/Index.vue')
+        component: () => import('../home/views/Home.vue')
     },
     {
         name: 'Auth',

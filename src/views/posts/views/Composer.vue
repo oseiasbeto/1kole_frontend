@@ -3,14 +3,19 @@
         :style="{ height: `calc(${viewportHeight}px - 52px)` }">
 
         <!--start header-->
-        <div class="flex fixed top-0 w-full z-[100] h-14 p-2 bg-light-bg dark:bg-dark-bg items-center justify-between">
+        <div class="flex fixed top-0 w-full z-[100] h-14 p-2 bg-surface-0 dark:bg-dark-bg items-center justify-between">
             <button
                 class="py-1.5 px-2.5 text-sm hover:bg-primary/20 dark:hover:bg-primary/30 text-light-link dark:text-dark-link rounded-full font-semibold flex items-center"
-                @click="openCancelModal">Cancelar</button>
+                @click="openCancelModal">
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m5.5 5.5 13 13m-13 0 13-13" class="icon_svg-stroke" stroke="#666" stroke-width="1.5"
+                        fill="none" fill-rule="evenodd" stroke-linecap="round"></path>
+                </svg>
+            </button>
             <button
-                class="py-1.5 px-3 text-sm rounded-full text-light-bg disabled:text-light-bg/80 disabled:opacity-80 disabled:pointer-events-none font-semibold bg-primary"
-                @click="handleSubmit" :disabled="!canPost || loadingCreatePost || selectFileLoading || isUploading">
-                {{ loadingCreatePost ? `${replyTo ? 'Respondendo...' : 'Postando'}` : `${replyTo ? 'Responder' :
+                class="h-9 px-5 text-sm rounded-full text-white disabled:opacity-60 disabled:pointer-events-none font-semibold bg-primary-500"
+                @click="handleSubmit" :disabled="!canPost || createKoolLoading || selectFileLoading || isUploading">
+                {{ createKoolLoading ? `${replyTo ? 'Respondendo...' : 'Postando'}` : `${replyTo ? 'Responder' :
                     'Postar'}` }}
             </button>
         </div>
@@ -54,12 +59,13 @@
 
                     <div class="px-4 flex flex-row">
                         <div>
-                            <Avatar :url="user?.profile_image?.low" />
+                            <Avatar :url="user?.profileImage?.url" />
                         </div>
                         <div class="flex-1">
-                            <textarea id="quillText" maxlength="280" v-model="postContent" ref="textAreaRef"
+                            <textarea :class="{ 'pointer-events-none': createKoolLoading }" id="quillText"
+                                maxlength="280" v-model="postContent" ref="textAreaRef"
                                 :placeholder="replyTo ? 'Escrever a resposta...' : 'Mekie?'"
-                                class="w-full placeholder:text-light-text-secondary placeholder:dark:text-dark-text-light text-base ml-2 p-1.5 bg-light-bg dark:bg-dark-bg leading-5 text-light-text-primary dark:text-dark-text-primary resize-none outline-none text-white placeholder-gray-500 mb-3"
+                                class="w-full placeholder:text-text-light placeholder:dark:text-dark-text-light text-base ml-2 p-1.5 bg-light-bg dark:bg-dark-bg leading-5 text-text-secondary dark:text-dark-text-primary resize-none outline-none placeholder-gray-500 mb-3"
                                 @input="adjustTextareaHeight">
                             </textarea>
                         </div>
@@ -107,7 +113,7 @@
         <!--end body-->
 
         <!--start footer-->
-        <div class="border-t fixed bottom-0 w-full border-light-border dark:border-dark-border bg-light-bg dark:bg-dark-bg p-2"
+        <div class="border-t border-border-light bg-surface-0 fixed bottom-0 w-full bg-light-bg dark:bg-dark-bg p-2"
             :style="{ transform: footerTransform }">
             <!-- Adicione aqui os controles do footer (emoji, mídia, etc) -->
             <div class="flex items-center justify-between">
@@ -115,8 +121,8 @@
                 <div class="flex-1">
                     <div v-if="!isUploading" class="flex items-center">
                         <button
-                            class="flex hover:bg-primary/20 dark:hover:bg-primary/25 items-center justify-center w-[39px] h-[39px] rounded-full text-primary disabled:pointer-events-none disabled:text-[#8c9eb2] disabled:dark:text-[#5b7795]"
-                            @click="imageInput?.click()" :disabled="hasVideo || selectFileLoading">
+                            class="flex hover:bg-primary/20 dark:hover:bg-primary/25 items-center justify-center w-[39px] h-[39px] rounded-full text-primary-500 disabled:pointer-events-none disabled:text-[#8c9eb2] disabled:dark:text-[#5b7795]"
+                            @click="imageInput?.click()" :disabled="hasVideo || selectFileLoading || createKoolLoading">
                             <input type="file" ref="imageInput" accept="image/*" multiple @change="handleImageUpload"
                                 class="hidden" />
                             <svg fill="none" viewBox="0 0 24 24" width="24" height="24">
@@ -126,8 +132,9 @@
                             </svg>
                         </button>
 
-                        <button @click="videoInput?.click()" :disabled="hasImages || selectFileLoading || hasUploadedVideo"
-                            class="flex hover:bg-primary/20 dark:hover:bg-primary/25 items-center justify-center w-[39px] h-[39px] rounded-full text-primary disabled:pointer-events-none disabled:text-[#8c9eb2] disabled:dark:text-[#5b7795]">
+                        <button @click="videoInput?.click()"
+                            :disabled="hasImages || selectFileLoading || hasUploadedVideo || createKoolLoading"
+                            class="flex hover:bg-primary/20 dark:hover:bg-primary/25 items-center justify-center w-[39px] h-[39px] rounded-full text-primary-500 disabled:pointer-events-none disabled:text-[#8c9eb2] disabled:dark:text-[#5b7795]">
                             <input type="file" ref="videoInput" accept="video/*" @change="handleVideoUpload"
                                 class="hidden" />
                             <svg fill="none" viewBox="0 0 24 24" width="24" height="24">
@@ -146,18 +153,18 @@
                                 class="text-[hsl(211,20%,85.89999999999999%)] dark:text-[hsl(211,28%,25.2%)]"
                                 stroke="currentColor" />
                             <!-- Círculo de progresso -->
-                            <path :stroke-dasharray="dashArrayUploadProgress" d="M15 2.5
+                            <path class="text-primary-500" :stroke-dasharray="dashArrayUploadProgress" d="M15 2.5
            a12.5 12.5 0 0 1 0 25
-           a12.5 12.5 0 0 1 0 -25" stroke-linecap="butt" stroke-width="3" stroke="hsl(211, 99%, 56%)" />
+           a12.5 12.5 0 0 1 0 -25" stroke-linecap="butt" stroke-width="3" stroke="currentColor" />
                         </svg>
                         <p
-                            class="text-sm truncate flex-1 text-ellipsis text-light-text-primary dark:text-dark-text-primary font-medium">
+                            class="text-sm truncate flex-1 text-ellipsis text-text-secondary dark:text-dark-text-primary font-medium">
                             {{ hasVideo ? 'Enviando o vídeo...' : 'Enviando imagens...' }}</p>
                     </div>
                 </div>
 
                 <div class="flex shrink-0 items-center gap-3">
-                    <p class="text-sm font-normal text-light-text-primary dark:text-dark-text-primary">
+                    <p class="text-sm font-normal text-text-secondary dark:text-dark-text-primary">
                         {{ remainingChars }}
                     </p>
 
@@ -169,9 +176,9 @@
                             class="text-[hsl(211,20%,85.89999999999999%)] dark:text-[hsl(211,28%,25.2%)]"
                             stroke="currentColor" />
                         <!-- Círculo de progresso -->
-                        <path :stroke-dasharray="dashArray" d="M15 2.5
+                        <path class="text-primary-500" :stroke-dasharray="dashArray" d="M15 2.5
            a12.5 12.5 0 0 1 0 25
-           a12.5 12.5 0 0 1 0 -25" stroke-linecap="butt" stroke-width="3" stroke="hsl(211, 99%, 56%)" />
+           a12.5 12.5 0 0 1 0 -25" stroke-linecap="butt" stroke-width="3" stroke="currentColor" />
                     </svg>
                 </div>
             </div>
@@ -179,27 +186,33 @@
         <!--end footer-->
 
         <!-- Modal de Confirmação -->
-        <div v-if="showModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[200]">
-            <div class="bg-light-bg dark:bg-dark-bg rounded-lg p-6 max-w-sm w-full mx-4">
-                <h3 class="text-lg font-semibold text-light-text-primary dark:text-dark-text-primary mb-4">
-                    Deseja cancelar o post?
-                </h3>
-                <p class="text-sm text-light-text-secondary dark:text-dark-text-secondary mb-6">
-                    Todo o conteúdo e mídias não salvas serão perdidos.
+        <Drawer @close="showModal = false" :is-open="showModal" title="Descartar post?">
+
+            <!-- Mensagem -->
+            <div class="px-6 py-6">
+                <p class="text-[15px] leading-6 text-text-secondary dark:text-surface-300 text-center">
+                    Seu texto, fotos e vídeos serão perdidos para sempre se você cancelar agora.
                 </p>
-                <div class="flex justify-end gap-3">
-                    <button
-                        class="py-2 px-4 text-sm rounded-full text-light-text-primary dark:text-dark-text-primary hover:bg-light-bg-hover dark:hover:bg-dark-bg-hover"
-                        @click="showModal = false">
-                        Continuar editando
-                    </button>
-                    <button class="py-2 px-4 text-sm rounded-full text-light-bg bg-primary hover:bg-primary/80"
-                        @click="confirmCancel">
-                        Cancelar post
-                    </button>
-                </div>
             </div>
-        </div>
+
+            <!-- Botões – empilhados, totalmente arredondados -->
+            <div class="flex flex-col gap-4 px-6 pb-8">
+                <button type="button" class="py-4 text-base font-medium rounded-full border-2 border-border-light dark:border-border-dark 
+               text-text-primary dark:text-text-inverse 
+               hover:bg-surface-100 dark:hover:bg-surface-800 
+               active:bg-surface-200 dark:active:bg-surface-700 active:scale-98 
+               transition-all duration-200 focus:outline-none" @click="showModal = false">
+                    Continuar editando
+                </button>
+
+                <button type="button"
+                    class="py-4 text-base font-semibold rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 active:scale-98 
+               text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 dark:focus:ring-offset-surface-950"
+                    @click="confirmCancel">
+                    Descartar tudo
+                </button>
+            </div>
+        </Drawer>
     </div>
 </template>
 
@@ -213,6 +226,11 @@ import { useStore } from 'vuex';
 import ReplyToOriginalPost from '../components/ReplyToOriginalPost.vue';
 import CryptoJS from 'crypto-js';
 import Avatar from '@/components/UI/Avatar.vue';
+import Drawer from '@/components/drawer/Drawer.vue';
+
+import { useKool } from '@/repositories/kool-repository';
+
+const { createKool, loading: createKoolLoading } = useKool();
 
 // Constantes do Cloudinary
 const CLOUD_NAME = 'daujoblcc';
@@ -220,7 +238,7 @@ const UPLOAD_PRESET = 'social_media_upload';
 const API_KEY = '686559434489718'; // Substitua pelo sua API Key do Cloudinary
 const API_SECRET = 'oAYl12OIZf2HkieFNDQQk2romHM'; // Substitua pelo seu API Secret do Cloudinary
 
-//const { createPost, loading: loadingCreatePost } = usePost();
+//const { createPost, loading: createKoolLoading } = usePost();
 //const { getPostById, loading: loadingGetPostById } = usePost();
 
 const router = useRouter();
@@ -272,7 +290,8 @@ const canPost = computed(() => {
         mediaPreviews.value.length > 0
     ) && remainingChars.value >= 0;
 });
-const user = computed(() => store.getters.currentUser);
+const user = computed(() => store.getters.user);
+
 const originalPost = computed(() => store.getters.originalPost);
 
 const progressChars = computed(() => {
@@ -674,8 +693,8 @@ const confirmCancel = async () => {
 
 const handleSubmit = async () => {
     if (!canPost.value || isUploading.value) return;
-    
-   // Usar diretamente as mídias válidas em mediaPreviews (já carregadas)
+
+    // Usar diretamente as mídias válidas em mediaPreviews (já carregadas)
     const validMedia = mediaPreviews.value.filter(media => media.public_id);
 
     const postData = {
@@ -706,7 +725,7 @@ const handleSubmit = async () => {
 
     if (postData.content || postData.media.length > 0) {
         try {
-            //await createPost(postData);
+            await createKool({ ...postData, shouldAddReply: false });
             resetForm();
             router.back();
         } catch (error) {

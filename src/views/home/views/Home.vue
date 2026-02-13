@@ -75,10 +75,11 @@ const onLoadMore = async (page) => {
 <template>
     <div class="relative overflow-y-auto">
         <!--start content home page area-->
-
+        <div>
+            <CreatePostTrigger post-module="feed"/>
+        </div>
         <!--start timeline area-->
         <div class="h-full" v-if="!loading">
-            <CreatePostTrigger post-module="feed"/>
             <KoolList v-if="kools.data.length" :load-more-loading="loadMoreLoading" :kools="kools.data"
                 :is-replies="false" :metadata="kools.metadata" @load-more="onLoadMore" />
             <div class="h-[40vh]" v-else>

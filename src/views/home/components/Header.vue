@@ -1,7 +1,7 @@
 <template>
     <div class="w-full right-0 left-0 z-[100] fixed top-0">
         <div class="h-11 bg-primary-500 w-full flex justify-between items-center">
-            <router-link to="/search" class="text-white gap-1 px-1 ml-2 h-9 active:bg-white/[0.6] flex items-center">
+            <router-link to="/search" class="text-white gap-1 px-1 ml-2 h-9 flex items-center">
                 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm10.45 2.95L16 16l4.95 4.95Z"
                         class="icon_svg-stroke" stroke="currentColor" stroke-width="1.5" fill="none"
@@ -10,7 +10,7 @@
                 <span class="text-sm font-medium">Pesquisar</span>
             </router-link>
 
-            <button @click="openCreateReplyModal" class="text-white gap-1 px-1 mr-2 h-9 active:bg-white/[0.6] flex items-center">
+            <router-link to="/composer" class="text-white gap-1 px-1 mr-2 h-9 flex items-center">
                 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <g class="icon_svg-stroke" stroke="currentColor" stroke-width="1.5" fill="none" fill-rule="evenodd">
                         <path d="M12 7v10m-5-5h10" stroke-linecap="round"></path>
@@ -18,12 +18,12 @@
                     </g>
                 </svg>
                 <span class="text-sm font-medium">Adicionar</span>
-            </button>
+            </router-link>
         </div>
         <div>
             <ul
-                class="flex shadow-[0_1px_1px_rgba(0,0,0,0.04)] border-b active:bg-white/[0.6] border-border-light flex-row w-full">
-                <li class="bg-secondary-500 text-text-secondary border-r active:bg-white/[0.6] border-border-light flex-1">
+                class="flex shadow-[0_1px_1px_rgba(0,0,0,0.04)] border-b border-border-light flex-row w-full">
+                <li class="bg-secondary-500 text-text-secondary border-r border-border-light flex-1">
                     <router-link :class="{'text-primary-500': route.path == '/'}" class="flex p-2 px-[8px] justify-center items-center grow h-11 lg:hover:bg-light"
                         to="/">
 
@@ -45,7 +45,7 @@
                         </svg>
                     </router-link>
                 </li>
-                <li class="bg-secondary-500 text-text-secondary border-r active:bg-white/[0.6] border-border-light flex-1">
+                <li class="bg-secondary-500 text-text-secondary border-r border-border-light flex-1">
                     <router-link class="flex p-2 px-[8px] justify-center items-center grow h-11 lg:hover:bg-light"
                         to="/search">
                         <svg v-if="route.path == '/search'" fill="none" class="w-6 h-6 lg:w-7 lg:h-7 shrink-0"
@@ -62,7 +62,7 @@
                         </svg>
                     </router-link>
                 </li>
-                <li class="bg-secondary-500 text-text-secondary border-r active:bg-white/[0.6] border-border-light flex-1">
+                <li class="bg-secondary-500 text-text-secondary border-r border-border-light flex-1">
                     <router-link class="flex p-2 px-[8px] justify-center items-center grow h-11 lg:hover:bg-light"
                         to="/notifications">
                         <svg v-if="route.path == '/notifications'" fill="none" class="w-6 h-6 lg:w-7 lg:h-7 shrink-0"
@@ -79,7 +79,7 @@
                         </svg>
                     </router-link>
                 </li>
-                <li class="bg-secondary-500 text-text-secondary border-r active:bg-white/[0.6] border-border-light flex-1">
+                <li class="bg-secondary-500 text-text-secondary border-r border-border-light flex-1">
                     <router-link class="flex p-2 px-[8px] justify-center items-center grow h-11 lg:hover:bg-light"
                         to="/messages">
                         <svg v-if="route.path == '/messages'" fill="none" class="w-6 h-6 lg:w-7 lg:h-7 shrink-0"
@@ -97,7 +97,7 @@
                     </router-link>
                 </li>
                 <li
-                    class="hidden lg:block bg-secondary-500 text-text-secondary border-r active:bg-white/[0.6] border-border-light flex-1">
+                    class="hidden lg:block bg-secondary-500 text-text-secondary border-r border-border-light flex-1">
                     <router-link class="flex p-2 px-[8px] justify-center items-center grow h-11 lg:hover:bg-light"
                         to="/feeds">
                         <svg v-if="route.path == '/feeds'" fill="none" class="w-6 h-6 lg:w-7 lg:h-7 shrink-0"
@@ -115,7 +115,7 @@
                     </router-link>
                 </li>
                
-                <li class="bg-secondary-500 text-text-secondary border-r active:bg-white/[0.6] border-border-light flex-1">
+                <li class="bg-secondary-500 text-text-secondary border-r border-border-light flex-1">
                     <router-link class="flex p-2 px-[8px] justify-center items-center grow h-11 lg:hover:bg-light"
                         :to="'/' + user?.username">
                         <div class="flex-shrink-0">
