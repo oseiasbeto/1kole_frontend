@@ -48,6 +48,7 @@ module.exports = {
           primary: '#0f172a',     // Light mode
           secondary: '#636466',
           muted: '#636466',
+          light: '#939598',       // Para usar em fundos escuros
           inverse: '#f1f5f9',     // Para usar em fundos escuros
         },
 

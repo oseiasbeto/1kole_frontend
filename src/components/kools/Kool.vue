@@ -132,7 +132,7 @@ const handleOpenModal = (data) => {
 
 
 <template>
-    <div @click="goToView" class="border-b border-border p-4 cursor-pointer"
+    <div @click="goToView" class="border-b-[6px] border-border-light p-4 cursor-pointer"
         :class="{ 'border-none': !props.showBorder, 'pointer-events-none': isBlocked }">
 
         <div class="relative">

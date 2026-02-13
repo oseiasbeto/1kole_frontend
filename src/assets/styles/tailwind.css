@@ -24,3 +24,6 @@ html {
     display: none !important;
     /* Remove o ícone */
 }
+.qu-tapHighlight--white {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.6);
+}

@@ -11,6 +11,7 @@ import SpinnerNormal from '@/components/UI/spinners/SpinnerNormal.vue';
 import EmptyKools from '@/components/kools/EmptyKools.vue';
 import Sidebar from '@/components/UI/Sidebar.vue';
 import Header from '../components/Header.vue';
+import CreatePostTrigger from '@/views/posts/components/CreatePostTrigger.vue';
 const { getKools, loading } = useKool()
 const { loadMore, loading: loadMoreLoading } = useKool()
 
@@ -77,6 +78,7 @@ const onLoadMore = async (page) => {
 
         <!--start timeline area-->
         <div class="h-full" v-if="!loading">
+            <CreatePostTrigger post-module="feed"/>
             <KoolList v-if="kools.data.length" :load-more-loading="loadMoreLoading" :kools="kools.data"
                 :is-replies="false" :metadata="kools.metadata" @load-more="onLoadMore" />
             <div class="h-[40vh]" v-else>
