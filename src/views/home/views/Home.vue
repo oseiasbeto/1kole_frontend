@@ -1,17 +1,14 @@
 <script setup>
 import { useKool } from '@/repositories/kool-repository';
-import CreateKoolBox from '@/components/kools/CreateKoolBox.vue';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import KoolList from '@/components/kools/KoolList.vue';
-import Tabs from '@/components/tabs/Tabs.vue';
-import TabItem from '@/components/tabs/TabItem.vue';
-import CreateKoolBtn from '@/components/UI/buttons/CreateKoolBtn.vue';
 import SpinnerNormal from '@/components/UI/spinners/SpinnerNormal.vue';
 import EmptyKools from '@/components/kools/EmptyKools.vue';
-import Sidebar from '@/components/UI/Sidebar.vue';
-import Header from '../components/Header.vue';
 import CreatePostTrigger from '@/views/posts/components/CreatePostTrigger.vue';
+
+import { enablePullToRefresh } from "webtonative";
+
 const { getKools, loading } = useKool()
 const { loadMore, loading: loadMoreLoading } = useKool()
 
@@ -32,6 +29,7 @@ const user = computed(() => {
 })
 
 onMounted(async () => {
+    enablePullToRefresh(true)
     if (!kools.value.data.length) {
         await getKools({
             page: 1,

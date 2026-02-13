@@ -29,7 +29,8 @@
     "vue-toggles": "^2.1.0",
     "vue-virtual-scroller": "^2.0.0-beta.8",
     "vue3-toastify": "^0.2.4",
-    "vuex": "^4.1.0"
+    "vuex": "^4.1.0",
+    "webtonative": "^1.0.89"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

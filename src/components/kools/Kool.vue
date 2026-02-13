@@ -160,7 +160,7 @@ const handleOpenModal = (data) => {
 
                                 <!-- Selo de verificado -->
                                 <svg v-if="props?.kool?.author?.verified" aria-label="Verificado" role="img" viewBox="0 0 40 40"
-                                    class=" shrink-0 w-3 ml-1 text-primary-500">
+                                    class=" shrink-0 w-[14px] ml-1 text-primary-500">
                                     <title>Verificado</title>
                                     <path
                                         fill="currentColor"

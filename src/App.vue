@@ -5,11 +5,12 @@ import Cookies from "js-cookie"
 import SplashScreen from './components/UI/SplashScreen.vue';
 import { useStore } from 'vuex';
 import CreateKoolModal from '@/components/UI/modals/CreateKoolModal.vue';
-import Sidebar from '@/components/UI/Sidebar.vue';
-import Content from './components/UI/Content.vue';
 import EditProfileModal from './components/UI/modals/EditProfileModal.vue';
 import Header from './views/home/components/Header.vue';
 import { useRoute } from 'vue-router';
+
+import { registerNotification } from "webtonative"
+
 const { refreshToken, loading } = useAuth()
 loading.value = true
 
@@ -32,6 +33,13 @@ const isLogged = computed(() => {
 onBeforeMount(async () => {
     if (sessionId) {
         await refreshToken(sessionId)
+            .then(() => {
+                registerNotification({
+                    callback: function (data) {
+                        //data will contain the keys
+                    }
+                });
+            })
     } else {
         setTimeout(() => {
             loading.value = false
