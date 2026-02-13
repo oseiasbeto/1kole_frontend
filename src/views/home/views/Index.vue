@@ -9,6 +9,8 @@ import TabItem from '@/components/tabs/TabItem.vue';
 import CreateKoolBtn from '@/components/UI/buttons/CreateKoolBtn.vue';
 import SpinnerNormal from '@/components/UI/spinners/SpinnerNormal.vue';
 import EmptyKools from '@/components/kools/EmptyKools.vue';
+import Sidebar from '@/components/UI/Sidebar.vue';
+import Header from '../components/Header.vue';
 const { getKools, loading } = useKool()
 const { loadMore, loading: loadMoreLoading } = useKool()
 
@@ -70,21 +72,13 @@ const onLoadMore = async (page) => {
 </script>
 
 <template>
-    <div>
+    <div class="relative overflow-y-auto">
         <!--start content home page area-->
-
-        <!--start tabs area-->
-        <Tabs v-if="!loading">
-            <TabItem title="Para voce" @onpress="tabView = 'foryou'" :active="tabView == 'foryou'" />
-            <TabItem title="Seguindo" @onpress="tabView = 'following'" :active="tabView == 'following'" />
-        </Tabs>
-
-        <!--end tabs area-->
 
         <!--start timeline area-->
         <div class="h-full" v-if="!loading">
-            <KoolList v-if="kools.data.length" :load-more-loading="loadMoreLoading" :kools="kools.data" :is-replies="false"
-                :metadata="kools.metadata" @load-more="onLoadMore" />
+            <KoolList v-if="kools.data.length" :load-more-loading="loadMoreLoading" :kools="kools.data"
+                :is-replies="false" :metadata="kools.metadata" @load-more="onLoadMore" />
             <div class="h-[40vh]" v-else>
                 <EmptyKools />
             </div>
@@ -93,9 +87,6 @@ const onLoadMore = async (page) => {
             <SpinnerNormal />
         </div>
         <!--end timeline area-->
-
-        <CreateKoolBtn />
-
         <!--end content home page area-->
     </div>
 

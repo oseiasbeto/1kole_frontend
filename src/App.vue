@@ -8,10 +8,14 @@ import CreateKoolModal from '@/components/UI/modals/CreateKoolModal.vue';
 import Sidebar from '@/components/UI/Sidebar.vue';
 import Content from './components/UI/Content.vue';
 import EditProfileModal from './components/UI/modals/EditProfileModal.vue';
+import Header from './views/home/components/Header.vue';
+import { useRoute } from 'vue-router';
 const { refreshToken, loading } = useAuth()
 loading.value = true
 
 const store = useStore()
+const route = useRoute()
+
 const sessionId = Cookies.get("session_id")
 
 const user = computed(() => {
@@ -38,25 +42,21 @@ onBeforeMount(async () => {
 
 <template>
     <!-- start main app area-->
-    <div class="box-border text-title font-primary overflow-x-hidden mb-14 lg:mb-0" v-if="!loading">
+    <div class="box-border select-none text-text-primary text-title font-primary overflow-x-hidden mb-14 lg:mb-0"
+        v-if="!loading">
         <div class="flex flex-col lg:flex-row w-full">
-            <Sidebar v-if="isLogged" />
-
-            <div class="lg:mx-auto">
-                <div class="flex grow">
-                    <!--start content-->
-                    <Content>
-                        <router-view></router-view>
-                    </Content>
-                    <!--end content-->
-                </div>
+            <div v-if="isLogged && route.meta?.rootPage == 'home'" class="mb-[88px]">
+                <Header/>
+            </div>
+            <div>
+                <router-view></router-view>
             </div>
         </div>
 
 
         <!--start modals-->
         <CreateKoolModal />
-        <EditProfileModal/>
+        <EditProfileModal />
         <!--end modals-->
     </div>
     <div v-else>

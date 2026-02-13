@@ -1,9 +1,9 @@
 <script setup>
 import { useStore } from 'vuex';
-import RegisterUserModal from './components/modals/RegisterUserModal.vue';
-import CheckAccountModal from './components/modals/CheckAccountModal.vue';
-import AuthUserModal from './components/modals/AuthUserModal.vue';
-import ForgotPasswordModal from './components/modals/ForgotPasswordModal.vue';
+import RegisterUserModal from '../components/modals/RegisterUserModal.vue';
+import CheckAccountModal from '../components/modals/CheckAccountModal.vue';
+import AuthUserModal from '../components/modals/AuthUserModal.vue';
+import ForgotPasswordModal from '../components/modals/ForgotPasswordModal.vue';
 import ButtonPrimary from '@/components/UI/buttons/ButtonPrimary.vue';
 import ButtonSecondary from '@/components/UI/buttons/ButtonSecondary.vue';
 
@@ -22,7 +22,7 @@ const openModal = (name, data) => {
 
 <template>
     <!--start content home page area-->
-    <div class="flex flex-col w-full h-screen text-text-primary">
+    <div class="flex flex-col w-full overflow-hidden px-4 h-screen text-text-primary">
         <div class="flex-1 flex flex-col items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-8" version="1.0" width="180px"
                 viewBox="0 0 1024.000000 1024.000000" preserveAspectRatio="xMidYMid meet">

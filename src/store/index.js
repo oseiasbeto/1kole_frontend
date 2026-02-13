@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import modules from "./modules";
 
 export default createStore({
     state: {
@@ -413,5 +414,6 @@ export default createStore({
             if (!state.accessToken) return false
             else return true
         }
-    }
+    },
+    ...modules
 })
