@@ -17,7 +17,7 @@
                         <circle cx="12" cy="12" r="9"></circle>
                     </g>
                 </svg>
-                <span class="text-sm font-medium">Adicionar</span>
+                <span class="text-sm font-medium">Novo post</span>
             </router-link>
         </div>
         <div>

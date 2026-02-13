@@ -132,61 +132,48 @@ const handleOpenModal = (data) => {
 
 
 <template>
-    <div @click="goToView" class="border-b-[6px] border-border-light p-4 cursor-pointer"
+    <div @click="goToView" class="border-b-[6px] border-border-light cursor-pointer"
         :class="{ 'border-none': !props.showBorder, 'pointer-events-none': isBlocked }">
 
         <div class="relative">
             <!--start contents area-->
             <div class="flex flex-1 flex-col">
                 <!--start header content area-->
-                <div class="flex mb-2.5 flex-row">
+                <div class="flex px-[10px] pt-[10px] mb-2.5 flex-row">
                     <!--start avatar area-->
-                    <router-link @click.stop :to="'/' + props.kool.author.username"
-                        class="flex flex-col relative pr-[10px]">
-                        <avatar size="w-[42px] flex-shrink-0 h-[42px]" 
-                        :url="props.kool?.author?.profileImage.url || props.kool?.author?.profileImage.low" />
-                        <div v-if="props.showLineThread" class="w-0.5 flex-shrink-0 bg-border mt-1 mx-auto grow"></div>
+                    <router-link @click.stop :to="'/' + props.kool.author.username" class="flex flex-col relative pr-2">
+                        <avatar custom="w-[38px] flex-shrink-0 h-[38px]"
+                            :url="props.kool?.author?.profileImage.url || props.kool?.author?.profileImage.low" />
                     </router-link>
                     <!--end avatar area-->
 
                     <!--start header content area-->
-                    <div class="flex w-full mb-1 flex-col text-sm leading-5">
+                    <div class="flex w-full flex-col text-sm leading-5">
                         <!-- Container flexível para nome e username -->
                         <div @click.stop class="shrink-1">
                             <div
                                 class="flex whitespace-nowrap truncate overflow-hidden max-w-full items-center min-w-0 shrink-1">
-                                <router-link class="font-semibold text-sm text-title hover:underline"
+                                <router-link class="font-semibold text-[13px] text-text-primary hover:underline"
                                     :to="'/' + props.kool.author.username">
                                     {{ props.kool.author.name }}
                                 </router-link>
 
                                 <!-- Selo de verificado -->
-                                <svg v-if="props?.kool?.author?.verified" width="24" height="24" viewBox="0 0 20 20"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 text-verified ml-1.5"
-                                    data-testid="svg-icon">
-                                    <title>Verified Account</title>
+                                <svg v-if="props?.kool?.author?.verified" aria-label="Verificado" role="img" viewBox="0 0 40 40"
+                                    class=" shrink-0 w-3 ml-1 text-primary-500">
+                                    <title>Verificado</title>
                                     <path
-                                        d="M8.82.521a1.596 1.596 0 012.36 0l.362.398c.42.46 1.07.635 1.664.445l.512-.163a1.596 1.596 0 012.043 1.18l.115.525a1.596 1.596 0 001.218 1.218l.525.115a1.596 1.596 0 011.18 2.043l-.163.513a1.596 1.596 0 00.446 1.663l.397.362a1.596 1.596 0 010 2.36l-.397.362c-.461.42-.635 1.07-.446 1.664l.163.512a1.596 1.596 0 01-1.18 2.043l-.525.115a1.596 1.596 0 00-1.218 1.218l-.115.525a1.596 1.596 0 01-2.043 1.18l-.512-.163a1.596 1.596 0 00-1.664.445l-.362.398a1.596 1.596 0 01-2.36 0l-.362-.398a1.596 1.596 0 00-1.663-.445l-.513.163a1.596 1.596 0 01-2.043-1.18l-.115-.525a1.596 1.596 0 00-1.218-1.218l-.525-.115a1.596 1.596 0 01-1.18-2.043l.164-.512a1.596 1.596 0 00-.446-1.664L.52 11.18a1.596 1.596 0 010-2.36l.398-.362c.46-.42.635-1.07.446-1.663L1.2 6.282a1.596 1.596 0 011.18-2.043l.525-.115a1.596 1.596 0 001.218-1.218l.115-.525A1.596 1.596 0 016.282 1.2l.513.163c.594.19 1.244.015 1.663-.445L8.821.52z"
-                                        fill="currentColor"></path>
-                                    <path
-                                        d="M6.66 7.464L5.012 9.111l3.85 3.85 5.483-5.481-1.966-1.966L8.544 9.35 6.66 7.464z"
-                                        fill="#fff"></path>
-                                    <path opacity=".5"
-                                        d="M11.25 15.55l-1.646-1.848 1.646-1.646 1.887 1.887-1.887 1.606z" fill="#fff">
+                                        fill="currentColor"
+                                        d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z">
                                     </path>
                                 </svg>
                             </div>
                         </div>
 
-                        <div class="flex items-center font-sm">
-                            <!-- Username, que acompanha o nome -->
-                            <router-link v-if="showUsername && props.kool.author.name.length < 20"
-                                class="text-gray min-w-0" :to="'/' + props.kool.author.username">
-                                @{{ props.kool.author.username }}
-                            </router-link>
+                        <div class="flex items-center text-[13px]">
                             <!-- Data de criação do Kool -->
-                            <div class="flex flex-row text-gray items-center flex-shrink-0">
-                                <div class="mx-1">·</div>
+                            <div class="flex flex-row text-text-secondary items-center flex-shrink-0">
+                                <!--<div class="mx-1">·</div>-->
                                 <div class="flex-shrink-0">
                                     {{ formatTime(props.kool.createdAt) }}
                                 </div>
@@ -199,14 +186,14 @@ const handleOpenModal = (data) => {
                 <!--end header content area-->
 
                 <!--start body content area-->
-                <Paragraph v-if="props.kool.content.length" class="mb-1" :txt="props.kool.content" />
+                <Paragraph v-if="props.kool.content.length" class="mb-0.5 px-[10px]" :txt="props.kool.content" />
                 <!--end body content area-->
 
                 <!--start media area-->
-                <div  @click.stop v-if="props.kool?.media && props.kool?.media.length && props.showMedia">
+                <div @click.stop v-if="props.kool?.media && props.kool?.media.length && props.showMedia">
                     <Media v-for="media in props.kool?.media" :key="media._id" :media="media" />
                 </div>
-               
+
                 <!--end media area-->
 
                 <!--start footer area-->

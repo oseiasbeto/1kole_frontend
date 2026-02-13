@@ -33,21 +33,43 @@ module.exports = {
 
         // Neutros – muito importantes para dark/light
         surface: {
-          0: '#ffffff',     // Light: fundo principal
-          50: '#f9fafb',
-          100: '#f3f4f6',
-          200: '#e5e7eb',
-          300: '#d1d5db',
-          800: '#1f2937',
-          900: '#111827',
-          950: '#0b0f19',    // Dark: fundo principal quase preto
+          0: '#ffffff',      // Fundo principal em light mode (páginas, cards brancos puros, telas limpas). 
+          // Use em: body principal light, cards elevados, modais light, áreas de destaque branco.
+
+          50: '#f9fafb',     // Fundo muito claro / "quase branco" – ideal para hover states sutis, 
+          // secondary backgrounds ou camadas leves em light mode.
+          // Use em: hover em cards, input backgrounds, subtle dividers em light.
+
+          100: '#f3f4f6',     // Cinza bem claro – o mais usado para fundos secundários em light mode.
+          // Use em: feed background, navbar light, cards com leve elevação, listas.
+
+          200: '#e5e7eb',     // Cinza médio-claro – ótimo para bordas, divisores e fundos terciários.
+          // Use em: border-light, separadores entre posts, input borders em light.
+
+          300: '#d1d5db',     // Cinza médio – usado em textos muted, ícones inativos, bordas mais visíveis.
+          // Use em: texto secundário claro, ícones desabilitados, linhas de separação fortes.
+
+          // ------------------------------------------------------
+          // A partir daqui começam os tons escuros (para dark mode)
+          // ------------------------------------------------------
+
+          800: '#1f2937',     // Cinza escuro médio-alto – fundo de cards, navbar ou elementos elevados em dark mode.
+          // Use em: cards dark, modais dark, header/footer dark, áreas destacadas.
+
+          900: '#111827',     // Cinza muito escuro – fundo principal em dark mode (quase preto, mas com calor).
+          // Use em: body principal dark, feed background dark, telas principais.
+
+          950: '#0b0f19',     // Quase preto puro (off-black) – o mais escuro da paleta.
+          // Use em: fundo de modals/bottom sheets em dark, overlays escuros, 
+          // áreas de alto contraste (ex: player de vídeo full-screen, drawer fundo).
+          // Dá sensação de profundidade e economiza bateria em OLED/AMOLED.
         },
 
         // Textos
         text: {
           primary: '#0f172a',     // Light mode
           secondary: '#636466',
-          muted: '#636466',
+          gray: '#282829',
           light: '#939598',       // Para usar em fundos escuros
           inverse: '#f1f5f9',     // Para usar em fundos escuros
         },

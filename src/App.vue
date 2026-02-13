@@ -46,10 +46,14 @@ onBeforeMount(async () => {
         v-if="!loading">
         <div class="flex flex-col lg:flex-row w-full">
             <div v-if="isLogged && route.meta?.rootPage == 'home'" class="mb-[88px]">
-                <Header/>
+                <Header />
             </div>
             <div>
-                <router-view></router-view>
+                <router-view v-slot="{ Component }">
+                    <keep-alive :include="['Composer']">
+                        <component :is="Component" />
+                    </keep-alive>
+                </router-view>
             </div>
         </div>
 

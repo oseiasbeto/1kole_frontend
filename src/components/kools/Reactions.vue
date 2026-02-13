@@ -125,12 +125,12 @@ const copyLink = (id) => {
 </script>
 
 <template>
-    <div class="pt-4">
+    <div class="px-[10px] py-1.5">
         <div data-testid="status-action-bar" class="flex rtl:space-x-reverse">
             <div class="flex rtl:space-x-reverse items-center space-x-2">
                 <button @click.stop @click="openModal('create kool', { parentKool: props.kool, isReply: true })"
                     type="button"
-                    class="flex items-center rounded-full p-1 rtl:space-x-reverse focus:outline-none   focus:ring-offset-2 dark:ring-offset-0 text-gray hover:text-gray/80 space-x-1"
+                    class="flex items-center rounded-full p-1 rtl:space-x-reverse focus:outline-none   focus:ring-offset-2 dark:ring-offset-0 text-text-secondary space-x-1"
                     title="Reply">
                     <div class="relative flex shrink-0 flex-col" data-testid="icon"><svg width="24" height="24"
                             viewBox="0 0 24 24" stroke="currentColor" stroke-linejoin="round" fill="none"
@@ -147,7 +147,7 @@ const copyLink = (id) => {
                     </p>
                 </button>
                 <button @click.stop @click="toggleRepost" type="button"
-                    class="flex items-center rounded-full p-1 rtl:space-x-reverse focus:outline-none   focus:ring-offset-2 dark:ring-offset-0 text-gray hover:text-gray/80 space-x-1"
+                    class="flex items-center rounded-full p-1 rtl:space-x-reverse focus:outline-none   focus:ring-offset-2 dark:ring-offset-0 text-text-secondary space-x-1"
                     title="ReTruth">
                     <div class="relative flex shrink-0 flex-col" data-testid="icon"><svg width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -170,7 +170,7 @@ const copyLink = (id) => {
                     </p>
                 </button>
                 <button @click.stop @click="toggleLike" id="like" type="button"
-                    class="flex items-center rounded-full p-1 rtl:space-x-reverse focus:outline-none   focus:ring-offset-2 dark:ring-offset-0 text-gray hover:text-gray/80 space-x-1"
+                    class="flex items-center rounded-full p-1 rtl:space-x-reverse focus:outline-none   focus:ring-offset-2 dark:ring-offset-0 text-text-secondary space-x-1"
                     title="Like">
                     <div class="relative flex shrink-0 flex-col" data-testid="icon">
                         <svg v-if="!isLiked" width="24" height="24" viewBox="0 0 24 24" stroke-linecap="round"
@@ -195,7 +195,7 @@ const copyLink = (id) => {
                     </p>
                 </button>
                 <button @click.stop @click="toggleRepost" type="button"
-                    class="flex items-center rounded-full p-1 rtl:space-x-reverse focus:outline-none   focus:ring-offset-2 dark:ring-offset-0 text-gray hover:text-gray/80 space-x-1"
+                    class="flex items-center rounded-full p-1 rtl:space-x-reverse focus:outline-none   focus:ring-offset-2 dark:ring-offset-0 text-text-secondary space-x-1"
                     title="Bookmark">
                     <div class="relative flex shrink-0 flex-col" data-testid="icon"><svg class="w-6 h-6 stroke-2"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -206,7 +206,7 @@ const copyLink = (id) => {
                         </svg></div>
                 </button>
                 <button @click.stop @click="copyLink(props.kool._id)" type="button"
-                    class="flex items-center rounded-full p-1 rtl:space-x-reverse focus:outline-none   focus:ring-offset-2 dark:ring-offset-0 text-gray hover:text-gray/80 space-x-1"
+                    class="flex items-center rounded-full p-1 rtl:space-x-reverse focus:outline-none   focus:ring-offset-2 dark:ring-offset-0 text-text-secondary space-x-1"
                     title="Share">
                     <div class="relative flex shrink-0 flex-col" data-testid="icon"><svg width="24" height="24"
                             viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
@@ -222,7 +222,7 @@ const copyLink = (id) => {
                 <Menu as="div" @click.stop class="relative flex">
                     <div class="z-[10px]">
                         <MenuButton @click.stop
-                            class="flex items-center rounded-full p-1 rtl:space-x-reverse focus:outline-none   focus:ring-offset-2 dark:ring-offset-0 text-gray hover:text-gray/80 space-x-1"
+                            class="flex items-center rounded-full p-1 rtl:space-x-reverse focus:outline-none   focus:ring-offset-2 dark:ring-offset-0 text-text-secondary space-x-1"
                             title="More">
                             <div class="relative flex shrink-0 flex-col" data-testid="icon"><svg
                                     class="w-6 h-6 stroke-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -245,7 +245,7 @@ const copyLink = (id) => {
                             <div class="py-1">
                                 <MenuItem v-slot="{ active }">
                                 <button @click="copyText" type="button"
-                                    class="w-full flex items-center justify-between text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    class="w-full flex items-center justify-between text-left px-4 py-2 text-sm text-text-secondary-700 hover:bg-gray-100">
                                     Compartilhar
 
                                     <svg fill="none" viewBox="0 0 24 24" width="20" height="20">
@@ -257,7 +257,7 @@ const copyLink = (id) => {
                                 </MenuItem>
                                 <MenuItem v-slot="{ active }">
                                 <button @click="toggleLike" type="button"
-                                    class="w-full flex items-center justify-between text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    class="w-full flex items-center justify-between text-left px-4 py-2 text-sm text-text-secondary-700 hover:bg-gray-100">
                                     {{ isLiked ? 'Descurtir' : 'Curtir' }}
                                     <svg fill="none" width="18" viewBox="0 0 24 24" height="18">
                                         <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
@@ -269,7 +269,7 @@ const copyLink = (id) => {
                                 <MenuItem v-slot="{ active }">
                                 <button @click="openModal('create kool', { parentKool: props.kool, isReply: true })"
                                     type="button"
-                                    class="w-full flex items-center justify-between text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    class="w-full flex items-center justify-between text-left px-4 py-2 text-sm text-text-secondary-700 hover:bg-gray-100">
                                     Responder
                                     <svg fill="none" width="18" viewBox="0 0 24 24" height="18">
                                         <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"

@@ -263,7 +263,7 @@ const isKeyboardOpen = ref(false);
 const viewportHeight = ref(window.visualViewport.height);
 
 // Constants
-const MAX_CHARS = 280;
+const MAX_CHARS = 500;
 const MAX_IMAGES = 4;
 const MAX_VIDEO_SIZE_MB = 50;
 

@@ -11,9 +11,9 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="rounded-lg border mt-2 bg-light border-border overflow-hidden">
-    <div v-if="media.type === 'image'" class="w-auto">
-      <img v-lazy="media.url" alt="Kool media" class="w-full max-h-96 object-cover">
+  <div class="mt-1.5 bg-secondary-500 overflow-hidden">
+    <div v-if="media.type === 'image'" class="w-full max-h-96 overflow-hidden">
+      <img v-lazy="media.url" alt="Kool media" class="w-full h-full m-0 object-cover">
     </div>
     <PlayerVideo v-if="media.type === 'video'" :video="media" />
   </div>
