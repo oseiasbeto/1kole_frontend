@@ -15,8 +15,11 @@ let lightbox = null
 
 onMounted(() => {
   lightbox = GLightbox({
-    selector: '.glightbox', // seleciona elementos com esta classe
-    loop: true
+     selector: '.glightbox',
+    loop: true,
+    type: 'image',   // garante que ele trate como imagem
+    openEffect: 'zoom',
+    closeEffect: 'fade'
   })
 })
 </script>
