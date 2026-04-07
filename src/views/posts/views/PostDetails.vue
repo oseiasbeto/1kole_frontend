@@ -188,11 +188,7 @@ import Navbar from '@/components/base/Navbar.vue';
 import Avatar from '@/components/utilities/Avatar.vue';
 import PostLoader from '../components/PostLoader.vue';
 import PostCardMedia from '@/app/media/components/PostCardMedia.vue';
-import {
-    bannerAd
-} from "webtonative/AdMob";
 
-import { enablePullToRefresh } from "webtonative";
 
 
 const { getPostById, loading: loadingGetPostId, } = usePost()
@@ -326,11 +322,6 @@ const handleScroll = (value) => {
     }
 }
 
-enablePullToRefresh(true);
-bannerAd({
-    adId: "ca-app-pub-3940256099942544/6300978111"
-})
-window.WTN.setNavigationBarColor({ color: "#FFFFFF" });
 
 watch(() => route.params.id, async (newId, oldId) => {
 
