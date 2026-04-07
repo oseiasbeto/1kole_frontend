@@ -192,6 +192,9 @@ import {
     bannerAd
 } from "webtonative/AdMob";
 
+import { enablePullToRefresh } from "webtonative";
+
+
 const { getPostById, loading: loadingGetPostId, } = usePost()
 const { getReplies, loading: loadingGetReplies } = usePost()
 const { getOriginalPostById, loading: loadingGetOriginalPost } = usePost()
@@ -323,14 +326,17 @@ const handleScroll = (value) => {
     }
 }
 
+enablePullToRefresh(true);
+bannerAd({
+    adId: "ca-app-pub-3940256099942544/6300978111"
+})
+window.WTN.setNavigationBarColor({ color: "#FFFFFF" });
 
 watch(() => route.params.id, async (newId, oldId) => {
 
     if (!newId || newId === oldId) return; // Evita chamadas se o ID for inválido ou repetido
-    bannerAd({
-        adId: "ca-app-pub-3940256099942544/6300978111"
-    })
-     window.WTN.setNavigationBarColor({ color: "#FFFFFF" });
+
+    window.WTN.setNavigationBarColor({ color: "#FFFFFF" });
     resetReplies()
     hasError.value = false
 
@@ -402,7 +408,7 @@ onMounted(async () => {
         setScrollPosition(0)
         loadingGetPostId.value = true
 
-        window.WTN.setNavigationBarColor({ color: "#FFFFFF" });
+
 
         //Pass the color you want to set in string format.
 
@@ -412,10 +418,6 @@ onMounted(async () => {
                 original_post: post.value,
                 page: 1,
                 limit: 10
-            })
-
-            bannerAd({
-                adId: "ca-app-pub-3940256099942544/6300978111"
             })
         }).catch(err => {
             hasError.value = true
@@ -452,10 +454,6 @@ onMounted(async () => {
                 totalPages: existingPostStore.replies.pagination.totalPages
             })
         }
-
-        bannerAd({
-            adId: "ca-app-pub-3940256099942544/6300978111"
-        })
     }
 })
 </script>
