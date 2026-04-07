@@ -188,6 +188,9 @@ import Navbar from '@/components/base/Navbar.vue';
 import Avatar from '@/components/utilities/Avatar.vue';
 import PostLoader from '../components/PostLoader.vue';
 import PostCardMedia from '@/app/media/components/PostCardMedia.vue';
+import {
+    bannerAd
+} from "webtonative/AdMob";
 
 const { getPostById, loading: loadingGetPostId, } = usePost()
 const { getReplies, loading: loadingGetReplies } = usePost()
@@ -324,7 +327,9 @@ const handleScroll = (value) => {
 watch(() => route.params.id, async (newId, oldId) => {
 
     if (!newId || newId === oldId) return; // Evita chamadas se o ID for inválido ou repetido
-
+    bannerAd({
+        adId: "ca-app-pub-3940256099942544/6300978111"
+    })
     resetReplies()
     hasError.value = false
 
@@ -396,12 +401,20 @@ onMounted(async () => {
         setScrollPosition(0)
         loadingGetPostId.value = true
 
+        window.WTN.setNavigationBarColor({ color: "#000000" });
+
+        //Pass the color you want to set in string format.
+
         await getPostById(route.params.id).then(async () => {
 
             await getReplies({
                 original_post: post.value,
                 page: 1,
                 limit: 10
+            })
+
+            bannerAd({
+                adId: "ca-app-pub-3940256099942544/6300978111"
             })
         }).catch(err => {
             hasError.value = true
@@ -412,6 +425,8 @@ onMounted(async () => {
         const postId = route.params.id
         const originalPostId = replies.value.lastRequest.originalPostId
         let existingPostStore;
+
+
 
         if (repliesStore.value.length) {
             existingPostStore = repliesStore.value.find(r => r.original_post._id === postId);
@@ -427,6 +442,7 @@ onMounted(async () => {
             }).catch(err => {
                 hasError.value = true
             })
+
         } else {
             store.dispatch("setReplies", {
                 replies: existingPostStore.replies.data,
@@ -435,6 +451,10 @@ onMounted(async () => {
                 totalPages: existingPostStore.replies.pagination.totalPages
             })
         }
+
+        bannerAd({
+            adId: "ca-app-pub-3940256099942544/6300978111"
+        })
     }
 })
 </script>
