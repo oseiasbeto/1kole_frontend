@@ -401,7 +401,7 @@ onMounted(async () => {
         setScrollPosition(0)
         loadingGetPostId.value = true
 
-        window.WTN.setNavigationBarColor({ color: "#000000" });
+        window.WTN.setNavigationBarColor({ color: "#FFFFFF" });
 
         //Pass the color you want to set in string format.
 
