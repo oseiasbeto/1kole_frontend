@@ -330,6 +330,7 @@ watch(() => route.params.id, async (newId, oldId) => {
     bannerAd({
         adId: "ca-app-pub-3940256099942544/6300978111"
     })
+     window.WTN.setNavigationBarColor({ color: "#FFFFFF" });
     resetReplies()
     hasError.value = false
 
