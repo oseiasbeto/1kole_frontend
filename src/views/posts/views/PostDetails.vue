@@ -9,7 +9,7 @@
 
                 <template #before-content>
                     <!--start header post-->
-                    <Navbar :title="hasError ? 'Erro' : post?.is_reply ? 'Resposta' : 'Postagem'" />
+                    <Navbar :title="hasError ? 'Erro' : post?.is_reply ? 'Resposta' : 'Post'" />
                     <!--end header post-->
 
                     <!--bar-->
