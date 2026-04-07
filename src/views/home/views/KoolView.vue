@@ -236,7 +236,7 @@ watch(() => route.params.id, async (newId, oldId) => {
 
 <template>
   <div>
-    <Navbar title="Kool" />
+    <Navbar title="Postagem" />
     <div v-if="loadingKool" class="flex justify-center my-10 h-screen">
       <SpinnerNormal />
     </div>
