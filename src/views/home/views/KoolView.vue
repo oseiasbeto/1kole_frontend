@@ -15,10 +15,8 @@ import formatCount from '@/utils/formatCount';
 import SpinnerNormal from '@/components/UI/spinners/SpinnerNormal.vue';
 import Media from '@/components/kools/Media.vue';
 import {
-    bannerAd
+  bannerAd
 } from "webtonative/AdMob";
-
-import { enablePullToRefresh } from "webtonative";
 
 // Obtendo funções do repositório de Kools e Usuários
 const { getKoolById, loading: loadingKool } = useKool()
@@ -115,11 +113,6 @@ const scrollOnTop = () => {
 // Recupera um Kool armazenado localmente pelo ID
 const getStoredKool = (id) => store.getters.getViewedKool(id);
 
-enablePullToRefresh(true);
-bannerAd({
-    adId: "ca-app-pub-3940256099942544/6300978111"
-})
-window.WTN.setNavigationBarColor({ color: "#FFFFFF" });
 
 
 // Copia o link do Kool para a área de transferência
@@ -144,6 +137,11 @@ const openCreateReplyModal = () => {
     }
   })
 }
+
+window?.WTN?.setNavigationBarColor({ color: "#FFFFFF" });
+bannerAd({
+  adId:"ca-app-pub-3940256099942544/6300978111"
+})
 
 // Seguir o autor do Kool
 const followAuthor = async (authorId) => {
@@ -236,7 +234,7 @@ watch(() => route.params.id, async (newId, oldId) => {
 
 <template>
   <div>
-    <Navbar title="Postagem" />
+    <Navbar title="Post" />
     <div v-if="loadingKool" class="flex justify-center my-10 h-screen">
       <SpinnerNormal />
     </div>

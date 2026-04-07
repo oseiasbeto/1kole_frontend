@@ -189,8 +189,6 @@ import Avatar from '@/components/utilities/Avatar.vue';
 import PostLoader from '../components/PostLoader.vue';
 import PostCardMedia from '@/app/media/components/PostCardMedia.vue';
 
-
-
 const { getPostById, loading: loadingGetPostId, } = usePost()
 const { getReplies, loading: loadingGetReplies } = usePost()
 const { getOriginalPostById, loading: loadingGetOriginalPost } = usePost()
@@ -327,7 +325,7 @@ watch(() => route.params.id, async (newId, oldId) => {
 
     if (!newId || newId === oldId) return; // Evita chamadas se o ID for inválido ou repetido
 
-    window.WTN.setNavigationBarColor({ color: "#FFFFFF" });
+    
     resetReplies()
     hasError.value = false
 
